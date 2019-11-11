@@ -1,0 +1,46 @@
+<!--
+  Generated template for the MePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"me.1" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid class="grid1" (click)="jump('ContactslistPage')">
+    <ion-row>
+      <ion-col>
+        <img src="../../../assets/imgs/contacts.png" alt="" class="img1">
+        <img src="../../../assets/imgs/JT.png" alt="" class="img2">
+        <p>{{"me.2" | translate}}</p>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <ion-grid class="grid2" (click)="jump('LanguagePage')">
+        <ion-row>
+            <ion-col>
+                <img src="../../../assets/imgs/Multilingual.png" alt="" class="img1">
+                <p>{{"me.3" | translate}}</p>
+                <img src="../../../assets/imgs/JT.png" alt="" class="img2">
+
+            </ion-col>
+        </ion-row>
+    </ion-grid> -->
+  <ion-grid class="grid2" (click)="jump('AboutPage')">
+    <ion-row>
+      <ion-col>
+        <img src="../../../assets/imgs/about.png" alt="" class="img1">
+        <p class="me">{{"me.4" | translate}}</p>
+        <img src="../../../assets/imgs/JT.png" alt="" class="img2">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

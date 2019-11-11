@@ -1,0 +1,178 @@
+page-subchain {
+  .content-ios {
+    color: #fff !important;
+    background-color: #fff !important;
+  }
+  .myslides {
+    height: 16rem;
+    border-radius: 0.4rem;
+    width: 100%;
+  }
+  .swiper-pagination-fraction,
+  .swiper-pagination-custom,
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    text-align: right;
+  }
+  .swiper-pagination-fraction,
+  .swiper-pagination-custom,
+  .swiper-container-horizontal > .swiper-pagination-bullets {
+    left: 0;
+    bottom: 25px;
+    width: 100%;
+  }
+  .swiper-pagination-bullet-active {
+    background: #fff;
+    opacity: 1;
+  }
+  .swiper-container {
+    margin-top: -3rem;
+  }
+  .swiper-slide img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    border-radius: 5px;
+  }
+  .toolbar-title-ios,
+  .toolbar-title {
+    font-size: 1.6rem;
+    color: #222222;
+    text-align: center;
+    padding: 0;
+    margin-left: 0rem !important;
+  }
+  .lists {
+    .add {
+      right: 1rem;
+      position: absolute;
+      top: 14.7rem;
+      img {
+        width: 2.5rem;
+        margin-top: 0.5rem;
+      }
+    }
+    .items {
+      width: 100%;
+      .list-top {
+        // display: flex;
+        display: flex;
+        margin-top: -0.5rem;
+        // border-bottom: 0.54px solid #E0E0E0;
+        .imgs {
+          width: 5.5rem;
+          height: 5.5rem;
+          border: 1px solid #e0e0e0;
+          border-radius: 0.5rem;
+          /* position: absolute; */
+          // left: 0rem;
+          /* top: 4.5rem; */
+          margin-top: 2.5rem;
+          margin-left: 0rem;
+          img {
+            width: 7rem;
+            height: 5rem;
+            // margin-left: 0.4rem;
+            // margin-top: 0.4rem;
+          }
+        }
+        .list_ri {
+          border-bottom: 1px solid #ccc;
+          width: calc(100% - 9rem);
+          margin-left: 1rem;
+          width: 77%;
+          h4 {
+            font-size: 1.5rem;
+            color: #222;
+            margin-top: 2.5rem;
+          }
+          p {
+            font-size: 1.2rem;
+            color: #222;
+          }
+        }
+      }
+      .list-bottom {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        // padding-bottom: 1rem;
+        border-bottom: 0.54px solid #e0e0e0;
+        span {
+          font-size: 1.2rem;
+          color: #999;
+          // padding-left: rem;
+        }
+      }
+    }
+    // .borders {
+    //     span {
+    //         font-size: 1.3rem;
+    //         color: #fff;
+    //         font-weight: normal;
+    //         height: 2.5rem;
+    //         text-align: left;
+    //         margin-top: 1rem !important;
+    //         padding: 1rem 0;
+    //         border-bottom: 2px solid #26B6AE;
+    //     }
+    // }
+  }
+  .item-ios {
+    padding-left: 0px !important;
+    // padding-top: 1rem;
+  }
+  .label-ios {
+    margin: 0px 0px 13px 0;
+  }
+  .item-ios.item-block .item-inner {
+    padding-right: 0px;
+    border-bottom: 1px solid #ffffff;
+  }
+  ion-segment {
+    width: 59% !important;
+    margin-left: -7.5rem;
+    // margin-top: 2rem;
+    margin-top: 1rem;
+    text-transform: none;
+  }
+  .segment-ios .segment-button {
+    text-transform: none;
+    margin-left: 1rem;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 0;
+    height: 3.2rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent !important;
+    font-size: 1.3rem;
+    line-height: 3rem;
+    color: #999 !important;
+    background-color: transparent;
+  }
+  .segment-ios .segment-button.segment-activated {
+    color: #222 !important;
+    background-color: #fff;
+    opacity: 1;
+    -webkit-transition: 100ms all linear;
+    transition: 100ms all linear;
+    border-bottom: 0px solid #fff;
+    border-width: 0px;
+    border-color: transparent !important;
+  }
+  .pass_border {
+    border-bottom: 2px solid #60ce46;
+    width: 1.7rem;
+    /* text-align: left; */
+    margin: 0 auto;
+    text-indent: -1.7rem;
+    // margin-left: 0rem;
+    /* margin-left: 9rem; */
+  }
+  .scroll-content {
+    background: #fff;
+  }
+}

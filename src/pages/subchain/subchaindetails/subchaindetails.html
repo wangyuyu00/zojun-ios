@@ -1,0 +1,112 @@
+<!--
+  Generated template for the SubchaindetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"subchain.18" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-segment [(ngModel)]="tabs">
+        <ion-segment-button value="assets">
+            {{"assets.2" | translate}}
+            <div class="pass_border"></div>
+        </ion-segment-button>
+        <ion-segment-button value="information">{{"subchain.19" | translate}}
+            <div class="coll_border"></div>
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="tabs">
+        <div *ngSwitchCase="'assets'">
+            <ion-list class="lists">
+                <ion-item class="items" (click)="toTrade(balance)">
+                    <img src="{{subChainInfo.icon !=''?subChainInfo.icon:'../../assets/imgs/moac.png'}}" alt="">
+                    <span>{{subChainInfo.erc20_symbol?subChainInfo.erc20_symbol:'COIN'}}</span>
+                    <span>{{balance}}</span>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div *ngSwitchCase="'information'">
+            <ion-grid class="grid3">
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>Name</span>
+                            <p>{{subChainInfo.name}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col (click)="copy(subChainInfo.MicroChain)">
+                        <img src="../../../assets/imgs/copy1.png" alt="">
+                        <div>
+                            <span>MicroChain Address</span>
+                            <p>{{subChainInfo.MicroChain}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col (click)="copy(subChainInfo.sender)">
+                        <img src="../../../assets/imgs/copy1.png" alt="">
+                        <div>
+                            <span>Sender</span>
+                            <p>{{subChainInfo.sender}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>IsToken</span>
+                            <p>{{detail.is_token==1?'true':'false'}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>MicroChain Balance</span>
+                            <p>{{subChainInfo.balance}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>ScsCount</span>
+                            <p>{{subChainInfo.ScsCount}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>BlockReward</span>
+                            <p>{{subChainInfo.blockReward}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>ViaReward</span>
+                            <p>{{subChainInfo.viaReward}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <div>
+                            <span>TxReward</span>
+                            <p>{{subChainInfo.txReward}}</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+</ion-content>

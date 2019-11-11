@@ -1,0 +1,55 @@
+page-payment {
+  .bar-button-default-ios,
+  .bar-button-clear-ios-default,
+  .bar-button-ios-default {
+    color: #fff !important;
+    background-color: transparent;
+  }
+  .toolbar-title-ios {
+    padding: 14px !important;
+    color: #fff !important;
+    font-size: 1.6rem;
+    margin-left: -2rem;
+  }
+  .paymeny {
+    width: 100%;
+    background: #323232;
+    // height: 30rem;
+    position: relative;
+    border-radius: 5px;
+    .receipt {
+      font-size: 1.6rem;
+      color: #b8bdd9;
+      line-height: 4rem;
+      text-align: center;
+    }
+    .address {
+      // background: url('../../../assets/imgs/paybg.png') no-repeat;
+      // background-size: cover;
+      // width: 100%;
+      img:nth-child(1) {
+        margin-top: -14rem;
+      }
+      p:nth-child(2) {
+        position: absolute;
+        top: 6rem;
+        text-align: center;
+        font-size: 1.5rem;
+        color: #000;
+      }
+      img:nth-child(3) {
+        width: 11rem;
+        position: absolute;
+        top: 14rem;
+        margin-left: 35%;
+      }
+    }
+    .copy {
+      text-align: center;
+      color: #26b6ae;
+      font-size: 1.7rem;
+      margin-top: 0.5rem;
+      padding-bottom: 1rem;
+    }
+  }
+}

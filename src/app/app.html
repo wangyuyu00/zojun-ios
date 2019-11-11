@@ -1,0 +1,31 @@
+<ion-menu [content]="mycontent" side="right" (ionOpen)="ionOpen()">
+  <ion-header>
+    <ion-navbar padding class="navbar">
+      <ion-title>
+        {{"assets.65" | translate}}
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  <ion-content class="menu-scroll-content">
+    <ion-list>
+      <ion-item menuClose detail-none *ngFor="let item of pockets,let i = index" [ngStyle]="{'background':(i%2==0) ? 'linear-gradient(to right,#5A91FB, #3B7BF6)' : 'linear-gradient(to
+              right, #92C6E7, #7AA5D0)'}">
+        <p>{{item.name}}</p>
+        <p>{{item.address}}</p>
+        <!-- <img src="../assets/imgs/userFlag.png" alt="" *ngIf="(item.name==user.name)?true:false"> -->
+        <span class="current-user" *ngIf="(item.name==user.name)?true:false">{{"assets.66" | translate}}</span>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+  <ion-footer class="menu-footer">
+    <button ion-button full class="" (click)="jump('SetpwdPage')">
+      <img src="../assets/imgs/careteWallet.png" alt="">
+      {{"assets.67" | translate}}
+    </button>
+    <button ion-button full class="" (click)="jump('ImportPage')">
+      <img src="../assets/imgs/improtWallet.png" alt="">
+      导入
+    </button>
+  </ion-footer>
+</ion-menu>
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

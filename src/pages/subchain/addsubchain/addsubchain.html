@@ -1,0 +1,29 @@
+<!--
+  Generated template for the AddsubchainPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"subchain.2" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="search">
+        <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" [placeholder]="'assets.31' | translate">
+        </ion-searchbar>
+    </div>
+    <ion-list class="lists">
+        <div class="box">
+            <span class="code-img "><img src="../../../assets/imgs/moaclogo.png" alt=""></span>
+            <!-- <img *ngIf="search.icon? true : false" src="{{search.icon}}" alt=""> -->
+            <ion-item class="items">
+                <ion-label>Filestorm</ion-label>
+
+            </ion-item>
+            <span class="mark"><img src="../../../assets/imgs/mark.png"></span>
+        </div>
+    </ion-list>
+</ion-content>

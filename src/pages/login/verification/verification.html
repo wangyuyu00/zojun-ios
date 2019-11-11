@@ -1,0 +1,37 @@
+<!--
+  Generated template for the VerificationPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>验证助记词</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img src="../../assets/imgs/bei.png" alt="">
+  <h6>验证助记词</h6>
+  <p class="titles">
+    根据您记下的助记词，按顺序点击，验证您备份的助记词
+    正确无误。
+  </p>
+  <ion-grid class="grid">
+    <p *ngIf="mnemonicClick.length>0?false:true" class="lengths">请按照顺序依次点击助记词</p>
+    <p class="items">
+      <span *ngFor="let item of mnemonicClick" (click)="cancel(item)">{{item.key}}</span>
+    </p>
+
+  </ion-grid>
+  <!-- <ion-grid class="grid">
+        <p>请按照顺序依次点击助记词</p>
+    </ion-grid> -->
+  <section class="btn">
+    <p>
+      <button [disabled]="!item.flag" class="btn_bg btn_click" *ngFor="let item of shuffleMnemonic"
+        (click)="SplicingMnemonic(item);item.flag=false">{{item.key}}</button>
+    </p>
+  </section>
+  <button class="sures" (click)="checkMnemonic()">确定</button>
+</ion-content>

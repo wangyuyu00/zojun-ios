@@ -1,0 +1,35 @@
+<!--
+  Generated template for the AddcontactPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"me.17" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-grid class="grid2">
+        <ion-row>
+            <ion-col>
+                <p>
+                    <ion-textarea [placeholder]="'me.18' | translate" [(ngModel)]="name"></ion-textarea>
+                </p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid1">
+        <ion-row>
+            <ion-col>
+                <p>
+                    {{"me.19" | translate}}
+                </p>
+                <img (click)="Scan()" src="../../../assets/imgs/ss.png" alt="" class="img1">
+
+                <textarea [placeholder]="'me.20' | translate" [(ngModel)]="address"></textarea>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <p class="sendto"><button (click)="addContacts()">{{"me.21" | translate}}</button></p>
+</ion-content>

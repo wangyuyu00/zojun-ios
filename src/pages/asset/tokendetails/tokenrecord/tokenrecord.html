@@ -1,0 +1,101 @@
+<!--
+  Generated template for the TokenrecordPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>交易详情</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="top">
+    <p><span>{{detail.value}}</span>{{detail.code}}</p>
+    <p>{{status == 0?'交易失败':(status == 1?'转账成功':'等待确认中')}}</p>
+  </div>
+  <ion-grid class="grid3" (click)="copy(detail.from)">
+    <ion-row>
+      <ion-col>
+        <img src="../../../assets/imgs/copy1.png" alt="">
+        <div>
+          <span>发款方</span>
+          <p>{{detail.from}}</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid3" (click)="copy(detail.to)">
+    <ion-row>
+      <ion-col>
+        <img src="../../../assets/imgs/copy1.png" alt="">
+        <div>
+          <span>收款方</span>
+          <p>{{detail.to}}</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid3" *ngIf="minerFee==0?false:true">
+    <ion-row>
+      <ion-col>
+        <div>
+          <span>矿工费</span>
+          <p>{{minerFee}} moac</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid3 grid4" (click)="copy(detail.hash)">
+    <ion-row>
+      <ion-col>
+        <img src="../../../assets/imgs/copy2.png" alt="">
+        <div>
+          <span>交易号</span>
+          <p>{{(detail.hash)?(detail.hash | slice:0:12):(detail.transactionHash | slice:0:12)}} ...
+            {{(detail.hash)?(detail.hash | slice:-12):(detail.transactionHash | slice:-12)}}</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid3">
+    <ion-row>
+      <ion-col>
+        <div>
+          <span>区块号</span>
+          <p>{{detail.blockNumber}}</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid3">
+    <ion-row>
+      <ion-col>
+        <div>
+          <span>交易时间</span>
+          <p>{{detail.timestamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+        </div>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="copy">
+    <p class="qrcode" id="private-key">
+      <ngx-qrcode
+        [qrc-value]="(detail.hash)?('http://explorer.moac.io/tx/'+detail.hash):('http://explorer.moac.io/tx/'+detail.transactionHash)"
+        id="qrcode"></ngx-qrcode>
+    </p>
+    <p
+      (click)="copy((detail.hash)?('http://explorer.moac.io/tx/'+detail.hash):('http://explorer.moac.io/tx/'+detail.transactionHash))">
+      复制链接</p>
+  </div>
+</ion-content>

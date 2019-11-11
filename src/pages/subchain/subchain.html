@@ -1,0 +1,57 @@
+<!--
+  Generated template for the SubchainPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"subchain.1" | translate}} </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-slides pager class="myslides">
+        <ion-slide *ngFor="let item of banners">
+            <a href="{{item.flashimgurl?item.flashimgurl:'###'}}">
+                <img src="{{item.flashimg}}" alt="">
+            </a>
+        </ion-slide>
+    </ion-slides>
+    <ion-list class="lists">
+        <!-- <div class="borders">
+            <span>
+                {{"subchain.1" | translate}}
+            </span>
+
+        </div> -->
+        <ion-segment [(ngModel)]="tabs">
+            <ion-segment-button value="pass">
+                {{"subchain.1" | translate}}
+                <div class="pass_border"></div>
+            </ion-segment-button>
+
+        </ion-segment>
+        <div [ngSwitch]="tabs">
+            <div *ngSwitchCase="'pass'">
+                <div class="items">
+                    <div class="list-top" *ngFor="let item of subChainList" (click)="toSubDetails(item)">
+                        <div class="imgs">
+                            <img src="{{item.icon}}" alt="">
+                        </div>
+                        <div class="list_ri">
+                            <h4>{{item.name}}</h4>
+                            <p>{{item.describe}}</p>
+                        </div>
+                    </div>
+                    <!-- <div class="list-bottom">
+                                        <span>{{item.developer}}</span>
+                                        <span>{{item.uptime}}</span>
+                                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- <div class="add" (click)="jump('AddsubchainPage')"><img src="../../assets/imgs/2.png" alt=""></div> -->
+
+    </ion-list>
+</ion-content>

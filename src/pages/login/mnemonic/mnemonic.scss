@@ -1,0 +1,57 @@
+page-mnemonic {
+  .titles {
+    width: 90%;
+    text-align: center;
+    margin: 2rem auto;
+    color: #afafaf;
+  }
+
+  img {
+    width: 6.5rem;
+    display: block;
+    margin: 0 auto;
+  }
+
+  h6 {
+    color: #717e8d;
+    font-size: 1.9rem;
+    text-align: center;
+  }
+
+  .banner {
+    width: 100%;
+    min-height: 13rem;
+    background: #fff;
+    border-radius: 5px;
+    justify-content: space-around;
+
+    p {
+      display: flex;
+      padding: 1rem;
+      flex-wrap: wrap;
+      min-height: 52%;
+
+      // border: 1px solid red;
+      span {
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        text-align: center;
+        font-size: 1.5rem;
+        background: #fff;
+        margin-left: 1.4rem;
+        display: inline-block;
+        color: #4c4c4c;
+      }
+    }
+  }
+
+  .copy {
+    display: block;
+    width: 100%;
+    height: 4rem;
+    margin: 3rem auto;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    background: linear-gradient(to right, #5a91fb, #3b7bf6);
+    color: #ffffff;
+  }
+}

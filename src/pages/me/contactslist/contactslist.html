@@ -1,0 +1,48 @@
+<!--
+  Generated template for the ContactslistPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>
+            <span>{{"me.2" | translate}}</span>
+        </ion-title>
+        <span class="add" (click)="jump('AddcontactPage')">{{"me.8" | translate}}</span>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <div class="search">
+        <ion-searchbar [(ngModel)]="myInput" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)"
+            [placeholder]="'me.9' | translate">
+        </ion-searchbar>
+    </div> -->
+    <ion-grid *ngIf="myInput==''?true:false">
+        <ion-row class="grid1" *ngFor="let item of contacts" (click)="toContactdetails(item)">
+            <ion-col>
+                <img src="../../../assets/imgs/moaclogo.png " alt=" ">
+                <div>
+                    <span>{{item.name}}</span>
+                    <p>{{item.address}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="myInput==''?false:true">
+        <ion-row class="grid1" *ngFor="let item of itemArray" (click)="toContactdetails(item)">
+            <ion-col>
+                <img src="../../../assets/imgs/moaclogo.png " alt=" ">
+                <div>
+                    <span>{{item.name}}</span>
+                    <p>{{item.address}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <p class="data " *ngIf="dataImg">~ {{"assets.39" | translate}} ~</p>
+</ion-content>

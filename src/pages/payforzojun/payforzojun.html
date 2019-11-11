@@ -1,0 +1,44 @@
+<!--
+  中君跳过来的支付页面
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>支付</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid class="grid1">
+    <ion-row justify-content-between>
+      <ion-col class="mo">
+        CKT
+      </ion-col>
+      <ion-col>
+        余额 ：{{value}}
+      </ion-col>
+    </ion-row>
+    <ion-row justify-content-between>
+      <ion-col class="mo">
+        支付金额：
+      </ion-col>
+      <ion-col>
+        {{amount}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid class="grid2">
+    <ion-row>
+      <ion-col>
+        收款方地址
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="cols">
+        {{toAddr}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="bottom">
+    <button (click)="next()">下一步</button>
+  </div>
+</ion-content>

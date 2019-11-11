@@ -1,0 +1,121 @@
+page-collectionsend {
+  .grid1 {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: #dfe0e3 0px 0px 10px;
+    margin-top: 1rem;
+    position: relative;
+    height: 10.5rem;
+    p:nth-child(1) {
+      width: 100%;
+      height: 3rem;
+      line-height: 1rem;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #f0f1f5;
+    }
+    p:nth-child(2) {
+      width: 100%;
+      color: #717e8d;
+      margin-top: 1.7rem;
+      display: block;
+    }
+    .img1 {
+      width: 1.5rem;
+      position: absolute;
+      top: 6.5rem;
+      right: 4rem;
+    }
+    .img2 {
+      width: 1.5rem;
+      position: absolute;
+      top: 6.5rem;
+      right: 1rem;
+    }
+    span {
+      display: inline-block;
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+    }
+    .slow {
+      display: block;
+      margin-top: 4.5rem;
+      position: absolute;
+      left: 0.5rem;
+    }
+    .fast {
+      display: block;
+      margin-top: 4.5rem;
+      position: absolute;
+      right: 1rem;
+    }
+  }
+  .grid1:not(:first-child) {
+    margin-top: 2rem;
+  }
+  .grid1:nth-child(3) {
+    p {
+      width: 100%;
+      height: 3rem;
+      line-height: 1rem;
+      font-size: 1.5rem;
+      border-bottom: 1px solid #ffffff;
+    }
+  }
+  ion-range {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: -2.5rem;
+    height: 7rem;
+  }
+  ion-input,
+  ion-textarea {
+    position: relative;
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    line-height: -1rem;
+    width: 80%;
+  }
+  .sendto {
+    margin-top: 4rem;
+    button {
+      width: 100%;
+      height: 4rem !important;
+      background: linear-gradient(to right, #5a91fb, #3b7bf6);
+      color: #ffffff;
+      color: #fff;
+      border-radius: 0.4rem;
+      outline-style: none;
+      font-size: 1.5rem;
+    }
+  }
+  .text-input-ios {
+    margin: 0px 0px !important;
+    padding: 0;
+    width: calc(100% - 8px - 8px);
+  }
+  .range-ios {
+    padding: 0px;
+  }
+  textarea {
+    border: none;
+    overflow: auto;
+    height: auto;
+    font: inherit;
+    width: 83%;
+    color: inherit;
+    height: 3rem;
+    margin-top: -0.3rem;
+  }
+}

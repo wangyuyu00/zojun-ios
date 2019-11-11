@@ -1,0 +1,50 @@
+<!--
+  Generated template for the AccountPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>账户信息</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list class="lists">
+        <ion-item class="items" (click)="modifyName()">
+            <span>账户名称</span>
+            <span>{{user.name}}</span>
+            <img src="../../../assets/imgs/JT.png" alt="" class="arrow">
+        </ion-item>
+        <ion-item class="items">
+            <div class="box" (click)="modifyPwd()">
+                <span>修改密码</span>
+                <img src="../../../assets/imgs/JT.png" alt="" class="arrow">
+            </div>
+            <div class="box" (click)="savePrivate()">
+                <span>导出私钥</span>
+                <img src="../../../assets/imgs/JT.png" alt="" class="arrow">
+            </div>
+            <div class="box" (click)="deleteWallet()">
+                <span>删除钱包</span>
+                <img src="../../../assets/imgs/JT.png" alt="" class="arrow">
+            </div>
+        </ion-item>
+        <ion-item class="items">
+            <div class="box1">
+                <p class="qrcode" id="private-key" *ngIf="user.address">
+                    <ngx-qrcode [qrc-value]="user.address" id="qrcode"></ngx-qrcode>
+                </p>
+                <p>钱包地址</p>
+                <div class="copy" (click)="copy(user.address)">
+                    <span class="copys">{{user.address}}</span>
+                    <img src="../../../assets/imgs/copy.png" alt="">
+                </div>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

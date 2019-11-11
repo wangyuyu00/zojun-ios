@@ -1,0 +1,286 @@
+//弹框提醒
+.alert-ios .alert-title {
+  // font-size: 1.8rem;
+}
+
+//去掉固定导航阴影问题
+.header-ios::after,
+.tabs-ios[tabsPlacement="top"] > .tabbar::after,
+.footer-ios::before,
+.tabs-ios[tabsPlacement="bottom"] > .tabbar::before {
+  // left: 0;
+  // bottom: -5px;
+  // background-position: left 0 top -2px;
+  // position: absolute;
+  // width: 100%;
+  // height: 5px;
+  // background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAHBAMAAADzDtBxAAAAD1BMV…h/TXEAAAAaSURBVAjXYxCEAgY4UIICBmMogMsgFLtAAQCNSwXZKOdPxgAAAABJRU5ErkJggg==);
+  // background-repeat: repeat-x;
+  // content: "";
+}
+
+.toolbar-title-ios,
+.toolbar-title {
+  // font-size: 1.6rem;
+  // color: #222222;
+  // text-align: center;
+}
+
+.back-button-ios {
+  // margin: 0;
+  // padding: 14px;
+  // width: 10rem;
+  // height: 100%;
+}
+
+.back-button-icon-ios {
+  // margin: 0;
+  // text-align: left;
+  // font-size: 2.4rem;
+  // margin-left: -5rem;
+  // margin-top: 1rem;
+  // font-weight: normal;
+}
+
+//header背景颜色
+ion-header {
+  // position: relative;
+  // background: transparent;
+
+  ion-title {
+    // background: linear-gradient(to right, #ffffff, #ffffff);
+    // text-align: center;
+    // color: #222222 !important;
+    // font-size: 1.6rem;
+  }
+
+  .toolbar-ios {
+    // padding: 0 !important;
+  }
+
+  .toolbar-title-ios {
+    // padding: 14px !important;
+    // color: #222222 !important;
+  }
+
+  .toolbar-background-ios {
+    // border-color: #b2b2b2;
+    // background: #ffffff;
+  }
+}
+
+//背景颜色
+.fixed-content {
+  // background: #f0f1f5;
+}
+
+// mune
+.navbar {
+  // text-align: left;
+
+  .toolbar-title-ios,
+  .toolbar-title {
+    // height: 5.7rem;
+    // text-align: left;
+    // margin: 0;
+    // color: #ffffff !important;
+    // background: #2d3037;
+    // font-size: 1.6rem !important;
+    // padding: 6px !important;
+    // line-height: 5rem;
+    // padding-left: 1.5rem !important;
+  }
+}
+
+.menu-scroll-content {
+  .scroll-content {
+    // background: #222222 !important;
+
+    .item,
+    .item-ios {
+      // width: 85%;
+      // height: 7.5rem;
+      // border-radius: 0.5rem;
+      // margin: 1rem auto;
+
+      .item-inner {
+        // border: 0;
+      }
+
+      p {
+        // width: 80%;
+        // margin: 0;
+        // color: #ffffff;
+        // word-break: break-all;
+        // word-wrap: break-word;
+        // white-space: normal;
+      }
+
+      p:nth-child(1) {
+        // font-size: 1.7rem;
+        // margin: 0rem 0 1rem 0;
+      }
+
+      p:nth-child(2) {
+        // font-size: 1.2rem;
+        // margin-top: -1rem;
+      }
+
+      img {
+        // position: absolute;
+        // top: 1rem;
+        // right: 1rem;
+        // width: 1.5rem;
+        // height: 1.5rem;
+      }
+    }
+  }
+}
+
+.menu-footer {
+  // display: flex;
+
+  button,
+  .button-ios {
+    // width: 50%;
+    // padding: 0;
+    // margin: 0;
+    // height: 4.6rem;
+    // background: #2d3037;
+    // font-size: 1.5rem;
+    // color: #ffffff;
+    // text-align: center;
+  }
+
+  button:nth-child(1) {
+    // border-right: 0.54px solid #ffffff;
+
+    img {
+      // width: 1.7rem;
+      // margin-right: 1rem;
+    }
+  }
+
+  button:nth-child(2) {
+    img {
+      // width: 1.5rem;
+      // margin-right: 1rem;
+    }
+  }
+}
+
+//tabs
+.tabs-ios .tab-button[aria-selected="false"] .tab-button-text {
+  display: block;
+  width: 100%;
+  // text-align: center;
+}
+
+.has-icon .tab-button-icon,
+.has-title .tab-button-text {
+  display: block;
+}
+
+.tabs-ios .tab-button[aria-selected="true"] {
+  color: #3b7bf6;
+  padding: 0;
+}
+
+.ion-tab-icon-base {
+  width: 2rem !important;
+  padding: 4px 4px 2px;
+}
+
+.ion-tab-icon-ios-base {
+  width: 2rem !important;
+  height: 32px;
+}
+
+$tabImageName: "1" "2" "3" "4";
+
+@for $i from 1 to 5 {
+  //for ios
+  .ion-ios-tab-#{nth($tabImageName, $i)} {
+    @extend .ion-tab-icon-base;
+    content: url("../assets/imgs/footer/#{nth($tabImageName, $i)}_on.png");
+  }
+
+  .ion-ios-tab-#{nth($tabImageName, $i)}-outline {
+    @extend .ion-tab-icon-base;
+    content: url("../assets/imgs/footer/#{nth($tabImageName, $i)}_off.png");
+  }
+
+  // for android
+  .tabs-ios .tab-button[aria-selected="true"] {
+    .ion-ios-tab-#{nth($tabImageName, $i)} {
+      @extend .ion-tab-icon-ios-base;
+      content: url("../assets/imgs/footer/#{nth($tabImageName, $i)}_on.png");
+    }
+  }
+
+  .tabs-ios .tab-button[aria-selected="false"] {
+    .ion-ios-tab-#{nth($tabImageName, $i)} {
+      @extend .ion-tab-icon-ios-base;
+      content: url("../assets/imgs/footer/#{nth($tabImageName, $i)}_off.png");
+    }
+  }
+}
+
+//toast提示框的样式
+.toast {
+  .toast-message {
+    color: #ffffff;
+  }
+
+  .toast-wrapper {
+    background: #333333;
+    width: 95%;
+    padding: 0rem 1.5rem;
+    line-height: 1.7rem;
+    text-align: center;
+    border-radius: 2px;
+    margin-top: 5%;
+  }
+}
+
+// menu 里当前钱包的样式
+.current-user {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 5rem;
+  height: 2rem;
+  line-height: 2rem;
+  border: 0.54px solid #ffffff;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  text-align: center;
+  color: #ffffff;
+}
+
+.enable-confirm {
+  // z-index: 9999999999;
+}
+
+.toast {
+  text-align: center;
+}
+
+.tab-button-text,
+.tab-button-icon {
+  display: block !important;
+}
+
+.tabs-ios[tabsLayout="icon-hide"] .tab-button,
+.tabs-ios[tabsLayout="title-hide"] .tab-button,
+.tabs-ios .tab-button.icon-only,
+.tabs-ios .tab-button.has-title-only {
+  // padding: 0 0px;
+}
+// .header-common {
+//   padding-top: env(safe-area-inset-top);
+// }
+
+// .footer-common {
+//   padding-bottom: env(safe-area-inset-bottom);
+// }

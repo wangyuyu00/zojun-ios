@@ -1,0 +1,113 @@
+page-asset {
+  .titles {
+    display: flex;
+    img {
+      right: 1.5rem;
+      bottom: 1.5rem;
+      position: absolute;
+      width: 1.5rem;
+    }
+  }
+  ion-slides {
+    display: block;
+    width: 100%;
+    height: 12rem;
+    background: #ffffff;
+    border-top: none !important;
+    margin-top: 0rem;
+    .swiper-container {
+      height: 12rem;
+    }
+  }
+  .box {
+    width: 90%;
+    height: 10rem;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 5px;
+    .img1 {
+      float: left;
+      width: 7rem;
+      margin-left: 1rem;
+      margin-top: 2rem;
+    }
+    span {
+      float: left;
+      color: #ffffff;
+      padding-top: 2rem;
+      padding-left: 1rem;
+    }
+    .img2 {
+      float: right;
+      width: 1.5rem;
+      margin-right: 1rem;
+      margin-top: 2rem;
+    }
+    p {
+      width: 80%;
+      color: #ffffff;
+      position: absolute;
+      left: 1rem;
+      top: 4rem;
+      font-size: 1.4rem;
+      text-align: left;
+    }
+    .spans {
+      font-size: 1.4rem;
+      margin-top: 3.9rem;
+      margin-left: -1rem;
+    }
+    .arrow {
+      width: 1.5rem;
+      float: right;
+      position: absolute;
+      right: 1rem;
+      top: 2rem;
+    }
+    .spot {
+      color: #ffffff;
+      position: absolute;
+      right: 1rem;
+      margin-top: 5rem;
+    }
+  }
+  .lists {
+    width: 95%;
+    margin: 0 auto;
+    .items {
+      margin-top: 2rem;
+      box-shadow: #dfe0e3 0px 0px 10px;
+      border-radius: 5px;
+      height: 6rem;
+      line-height: 6rem;
+      display: flex;
+      .icon {
+        width: 3rem;
+        height: 3rem;
+        line-height: 3rem;
+        text-align: center;
+        background: #000;
+        color: #fff;
+        font-size: 2rem;
+        border-radius: 50%;
+        margin: 1.5rem 1rem 0 1rem;
+      }
+      .name {
+        font-size: 1.5rem;
+        color: #222;
+        width: 5rem;
+      }
+      .num {
+        font-size: 1.3rem;
+        color: #222;
+        width: 65%;
+        text-align: right;
+      }
+      .arrow {
+        width: 1rem;
+        height: 1.5rem;
+        margin: 2.2rem 1rem 0 1rem;
+      }
+    }
+  }
+}

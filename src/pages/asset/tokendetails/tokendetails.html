@@ -1,0 +1,58 @@
+<!--
+  Generated template for the TokendetailsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>{{token.code}}</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-grid class="grid1">
+        <ion-row>
+            <ion-col>
+                <img *ngIf="(token.code == 'MOAC')?true:false" src="../../../assets/imgs/moaclogo.png" alt="">
+                <img src="{{token.icon}}" alt="" *ngIf="token.icon?true:false">
+                <span
+                    *ngIf="token.code=='MOAC' || token.icon ?false:true">{{token.code | slice:0:1 | uppercase }}</span>
+                <p>{{token.value}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid2">
+        <ion-row>
+            <ion-col>
+                交易记录
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3">
+        <ion-row *ngFor="let item of recordList" (click)="toDetail(item)">
+            <ion-col>
+                <img src="{{(item.type==0)?'../../../assets/imgs/send.png':'../../../assets/imgs/receive.png'}}" alt="">
+                <div>
+                    <span>{{item.value?item.value:item.amount}}{{item.code}}</span>
+                    <p>{{item.msg}}</p>
+                </div>
+                <span class="date">{{item.timestamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</span>
+            </ion-col>
+        </ion-row>
+        <div *ngIf="flag" class="ps">
+            <p>~没有更多了~</p>
+        </div>
+    </ion-grid>
+    <ion-infinite-scroll (ionInfinite)="$event.waitFor(doInfinite())">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+<ion-footer>
+    <button ion-button full class="" (click)="jump('CollectionreceivePage')">接收</button>
+    <button ion-button full class="" (click)="toTokenSend()">发送</button>
+</ion-footer>

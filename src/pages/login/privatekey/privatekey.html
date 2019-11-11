@@ -1,0 +1,36 @@
+<!--
+  Generated template for the PrivatekeyPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{"login.14" | translate}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="top">
+    <img class="logo" src="../../assets/imgs/bei.png" alt="">
+    <p>备份钱包私钥</p>
+  </div>
+  <div class="cont">
+    <p>1. 请不要在网络上传输私钥</p>
+    <p>2. 请不要把私钥告诉给任何人</p>
+    <p>3. 如果私钥泄露，请尽快转移资产到安全的钱包</p>
+  </div>
+  <div class="bot" (click)="copy(secret)">
+    <!-- <p class="imgs"></p> -->
+    <p>私钥文本</p>
+    <p>{{secret}}</p>
+    <!-- <img src="../../../assets/imgs/copy1.png" alt=""> -->
+  </div>
+  <p class="sendto">
+    我已备份好钱包私钥
+    <button (click)="copy(secret);toAssets()">复制私钥文本</button>
+  </p>
+</ion-content>

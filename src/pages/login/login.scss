@@ -1,0 +1,64 @@
+page-login {
+  .logo-bj {
+    width: 100%;
+    height: 100%;
+  }
+
+  .button-wrap {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    img:nth-child(1) {
+      margin: 10rem auto 2.6rem;
+      width: 7rem;
+      display: block;
+    }
+
+    p {
+      width: 100%;
+      text-align: center;
+      font-size: 1.4rem;
+      color: #717E8D;
+    }
+
+    p:nth-child(2) {
+      margin-top: -1rem;
+      font-size: 1.6rem;
+    }
+
+    p:nth-child(3) {
+      margin-bottom: 4rem;
+      font-size: 1.6rem;
+    }
+
+    button {
+      display: block;
+      width: 94%;
+      height: 4rem;
+      margin: 1rem auto;
+      border-radius: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    button:nth-child(4) {
+      background: linear-gradient(to right, #5A91FB, #3B7BF6);
+      color: #ffffff;
+    }
+
+    button:nth-child(5) {
+      background: #ffffff;
+      color: #222222;
+      border: 0.54px solid #3B7BF6;
+    }
+
+    .agreement {
+      span {
+        color: #3B7BF6;
+      }
+    }
+  }
+}

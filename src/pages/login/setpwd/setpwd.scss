@@ -1,0 +1,61 @@
+page-setpwd {
+  .top {
+    width: 100%;
+    text-align: center;
+    .logo {
+      width: 6rem;
+    }
+    p:nth-child(2) {
+      font-size: 1.9rem;
+      color: #717e8d;
+      margin-top: 0rem;
+    }
+    p:nth-child(3) {
+      width: 90%;
+      text-align: center;
+      color: #999999;
+      padding-top: 1rem;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+  .cont {
+    width: 100%;
+    background: #ffffff;
+    margin-top: 2rem;
+    border-radius: 5px;
+    box-shadow: #dfe0e3 0px 0px 10px;
+    .input-wrap {
+      position: relative;
+      padding-left: 1rem;
+      border-bottom: 1px solid #f0f1f5;
+      ion-input {
+        line-height: 2.8rem;
+      }
+    }
+    .input-wrap:last-child {
+      border: 0;
+    }
+    span {
+      display: block;
+      position: absolute;
+      right: 1rem;
+      top: 1.5rem;
+      img {
+        width: 2rem;
+      }
+    }
+  }
+  .sendto {
+    margin-top: 4rem;
+    button {
+      width: 100%;
+      height: 4rem !important;
+      background: linear-gradient(to right, #5a91fb, #3b7bf6);
+      color: #ffffff;
+      border-radius: 0.4rem;
+      outline-style: none;
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<!--
+  Generated template for the CollectionreceivePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>收款</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <div class="box">
+    <p class="add">收款地址</p>
+    <p class="qrcode" id="private-key" *ngIf="user.address">
+      <ngx-qrcode [qrc-value]="user.address" id="qrcode"></ngx-qrcode>
+    </p>
+    <div class="top">
+      <p (click)="copy(user.address)">{{user.address}}</p>
+    </div>
+  </div>
+</ion-content>

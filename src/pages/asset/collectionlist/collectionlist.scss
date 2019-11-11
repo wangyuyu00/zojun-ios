@@ -1,0 +1,38 @@
+page-collectionlist {
+    .cont {
+        width: 100%;
+        overflow: hidden;
+        .box {
+            width: 48%;
+            height: 12rem;
+            background: #ffffff;
+            border-radius: 0.5rem;
+            float: left;
+            box-shadow: #DFE0E3 0px 0px 10px;
+            margin-bottom: 4rem;
+            position: relative;
+            p {
+                position: absolute;
+                top: 11rem;
+                width: 100%;
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            img {
+                width: 90%;
+                width: 57%;
+                /* margin: 0 auto; */
+                margin-left: 20%;
+                margin-top: 10%;
+            }
+        }
+        .box:nth-child(even) {
+            margin-left: 1rem;
+        }
+    }
+    .cont1 {
+        margin: 0 !important;
+        text-align: center;
+        color: #b0b0b0;
+    }
+}

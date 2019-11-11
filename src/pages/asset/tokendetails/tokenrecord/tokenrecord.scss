@@ -1,0 +1,111 @@
+page-tokenrecord {
+  .top {
+    width: 100%;
+    background: #ffffff;
+    box-shadow: #DFE0E3 0px 0px 10px;
+    border-radius: 0.5rem;
+    // margin-top: -2rem;
+    padding-bottom: 0.5rem;
+
+    p {
+      width: 100%;
+      text-align: center;
+      height: 2rem;
+    }
+
+    p:nth-child(1) {
+      font-size: 2rem;
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+      padding: 2rem 0;
+
+      span {
+        color: #222222;
+        font-size: 3rem;
+      }
+    }
+
+    p:nth-child(2) {
+      font-size: 1.6rem;
+      display: block;
+    }
+  }
+
+  .grid3 {
+    width: 100%;
+    padding: 0 0 0rem 0;
+    position: relative;
+
+    .col {
+      display: flex;
+      border-bottom: 0.54px solid #E4E4E4;
+    }
+
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+      /* margin-right: 0.5rem; */
+      /* float: right; */
+      position: absolute;
+      right: 1rem;
+      top: 3rem;
+    }
+
+    div {
+      width: 85%;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+
+      span {
+        color: #666666;
+        font-size: 1.4rem;
+      }
+
+      p {
+        color: #222222;
+        font-size: 1.2rem;
+        margin: 0;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+
+  .grid3.grid4 {
+    img {
+      top: 3rem;
+      right: 10rem;
+    }
+
+    div {
+      p {
+        color: #3B7BF6;
+      }
+    }
+  }
+
+  .copy {
+    width: 6rem;
+    position: absolute;
+    top: 70%;
+    right: 1rem;
+
+    p {
+      display: block;
+      width: 100%;
+      height: 6rem;
+      background: #222222;
+    }
+
+    p:nth-child(2) {
+      width: 100%;
+      height: 2rem;
+      background: #3B7BF6;
+      text-align: center;
+      line-height: 2.3rem;
+      border-radius: 0.3rem;
+      color: #ffffff;
+      font-size: 1.2rem;
+    }
+  }
+}

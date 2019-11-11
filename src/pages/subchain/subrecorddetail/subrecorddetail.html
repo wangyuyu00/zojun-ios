@@ -1,0 +1,105 @@
+<!--
+  Generated template for the SubrecorddetailPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>{{"assets.26" | translate}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="top">
+        <p>COIN</p>
+        <p>{{"subchain.20" | translate}}</p>
+        <!-- <p>{{detail.status == 0?'交易失败':(detail.status == 1?'转账成功':'等待确认中')}}</p> -->
+    </div>
+    <ion-grid class="grid3">
+        <ion-row>
+            <ion-col>
+                <div>
+                    <span>{{"subchain.21" | translate}}</span>
+                    <p>{{detail.shardingFlag==0?('subchain.32' | translate):(detail.shardingFlag==1?('subchain.7' | translate):('assets.14' | translate))}}
+                    </p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3" (click)="copy(detail.from)">
+        <ion-row>
+            <ion-col>
+                <img src="../../../assets/imgs/copy1.png" alt="">
+                <div>
+                    <span>{{"assets.33" | translate}}</span>
+                    <p>{{detail.from}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3" (click)="copy(detail.to)">
+        <ion-row>
+            <ion-col>
+                <img src="../../../assets/imgs/copy1.png" alt="">
+                <div>
+                    <span>{{"assets.34" | translate}}</span>
+                    <p>{{detail.to}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3" *ngIf="minerFee==0?false:true">
+        <ion-row>
+            <ion-col>
+                <div>
+                    <span>{{"assets.18" | translate}}</span>
+                    <p>{{minerFee}} moac</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3 grid4" (click)="copy(detail.hash)">
+        <ion-row>
+            <ion-col>
+                <img src="../../../assets/imgs/copy1.png" alt="">
+                <div>
+                    <span>{{"assets.35" | translate}}</span>
+                    <p>{{(detail.hash)?(detail.hash | slice:0:12):(detail.transactionHash | slice:0:12)}} ...
+                        {{(detail.hash)?(detail.hash | slice:-12):(detail.transactionHash | slice:-12)}}</p>
+                </div>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3">
+        <ion-row>
+            <ion-col>
+                <div>
+                    <span>{{"assets.36" | translate}}</span>
+                    <p>{{detail.blockNumber}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid class="grid3">
+        <ion-row>
+            <ion-col>
+                <div>
+                    <span>{{"assets.37" | translate}}</span>
+                    <p>{{detail.timestamp*1000 | date : 'yyyy-MM-dd HH:mm:ss'}}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div class="copy">
+        <p class="qrcode" id="private-key">
+            <ngx-qrcode
+                [qrc-value]="(detail.hash)?('http://explorer.moac.io/tx/'+detail.hash):('http://explorer.moac.io/tx/'+detail.transactionHash)"
+                id="qrcode"></ngx-qrcode>
+        </p>
+        <p
+            (click)="copy((detail.hash)?('http://explorer.moac.io/tx/'+detail.hash):('http://explorer.moac.io/tx/'+detail.transactionHash))">
+            {{"assets.38" | translate}}</p>
+    </div>
+</ion-content>

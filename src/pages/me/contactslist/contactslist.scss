@@ -1,0 +1,59 @@
+page-contactslist {
+  .add {
+    display: block;
+    text-align: right;
+    width: 100%;
+    padding-right: 1rem;
+  }
+
+  .grid1 {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: #dfe0e3 0px 0px 10px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    .col {
+      display: flex;
+      /* height: 6.5rem; */
+      padding-top: 1rem;
+      padding-bottom: 0rem;
+      padding-left: 1rem;
+      /* padding: 1.2rem; */
+      color: black;
+    }
+    img {
+      width: 3.8rem;
+      height: 3.8rem;
+      margin-right: 0.5rem;
+    }
+    div {
+      width: 85%;
+      padding-top: 0.5rem;
+      span {
+        color: #222222;
+        font-size: 1.6rem;
+        position: absolute;
+        top: 1rem;
+        left: 6rem;
+      }
+      p {
+        color: #9d9d9d;
+        font-size: 1.2rem;
+        width: 90%;
+        margin-left: 0.5rem;
+        margin-top: 2rem;
+        text-align: left;
+      }
+    }
+  }
+  .grid1:not(:first-child) {
+    margin-top: 1rem;
+  }
+  .data {
+    width: 100%;
+    text-align: center;
+    color: #b0b0b0;
+    margin-top: 50%;
+  }
+}

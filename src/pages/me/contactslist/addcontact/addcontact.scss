@@ -1,0 +1,144 @@
+page-addcontact {
+  .grid1 {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: #dfe0e3 0px 0px 10px;
+    margin-top: 1rem;
+    position: relative;
+    p:nth-child(1) {
+      width: 100%;
+      color: #222;
+      text-indent: 1rem;
+      font-size: 1.5rem;
+      height: 3rem;
+      line-height: 1.5rem;
+      border-bottom: 1px solid #f0f1f5;
+    }
+    p:nth-child(3) {
+      width: 100%;
+      color: #848484;
+    }
+    .col {
+      padding: 0px;
+      position: relative;
+      width: 100%;
+      margin: 0;
+      min-height: 1px;
+      -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+    .img1 {
+      width: 1.5rem;
+      position: absolute;
+      top: 1.5rem;
+      right: 1rem;
+    }
+    // .img2 {
+    //     width: 1.5rem;
+    //     position: absolute;
+    //     top: 6rem;
+    //     right: 1rem;
+    // }
+    // span {
+    //     display: inline-block;
+    //     position: absolute;
+    //     top: 1.5rem;
+    //     right: 1rem;
+    // }
+    // .slow {
+    //     display: block;
+    //     margin-top: 4.5rem;
+    //     position: absolute;
+    //     left: 0.5rem;
+    // }
+    // .fast {
+    //     display: block;
+    //     margin-top: 4.5rem;
+    //     position: absolute;
+    //     right: 1rem;
+    // }
+  }
+  .grid2 {
+    width: 100%;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: #dfe0e3 0px 0px 10px;
+    margin-top: 1rem;
+    position: relative;
+    height: 5rem;
+    line-height: 1rem;
+    p:nth-child(1) {
+      width: 100%;
+      color: #222;
+      text-indent: 1rem;
+      font-size: 1.5rem;
+      height: 4rem;
+      margin-top: -2rem;
+      line-height: 2rem;
+    }
+    .col {
+      padding: 0px;
+      position: relative;
+      width: 100%;
+      margin: 0;
+      height: 5rem;
+      min-height: 1px;
+      -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+      -webkit-box-flex: 1;
+      -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      max-width: 100%;
+    }
+  }
+  .sendto {
+    margin-top: 4rem;
+    button {
+      width: 100%;
+      height: 4rem !important;
+      background: linear-gradient(to right, #5a91fb, #3b7bf6);
+      color: #ffffff;
+      color: #fff;
+      border-radius: 0.4rem;
+      outline-style: none;
+      font-size: 1.5rem;
+    }
+  }
+  ion-input,
+  ion-textarea {
+    position: relative;
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    width: 100%;
+    margin-top: -1.5rem;
+  }
+  .text-input-ios {
+    margin: 0px 8px;
+    padding: 0;
+    width: calc(100% - 8px - 8px);
+    margin-top: 3rem;
+  }
+  textarea {
+    border: none;
+    overflow: auto;
+    height: auto;
+    font: inherit;
+    width: 100%;
+    color: inherit;
+    height: 3rem;
+    // margin-top: 0.4rem;
+    text-indent: 0.5rem;
+  }
+}

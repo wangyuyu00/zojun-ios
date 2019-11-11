@@ -1,0 +1,215 @@
+page-payforzojun {
+  .bar-button-default-ios,
+  .bar-button-clear-ios-default,
+  .bar-button-ios-default {
+    color: #222 !important;
+    background-color: transparent;
+  }
+  .toolbar-title-ios {
+    padding: 14px !important;
+    color: #222 !important;
+    font-size: 1.6rem;
+    margin-left: 0;
+  }
+  .grid {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    //   box-shadow: #DFE0E3 0px 0px 10px;
+    margin: 1rem auto;
+    img {
+      width: 4rem;
+      margin: 2rem 0 3rem 0;
+    }
+    p {
+      font-size: 2rem;
+      padding: 0;
+      margin: 0;
+      color: #222222;
+    }
+  }
+  .grid1 {
+    .mo {
+      margin-top: 1rem;
+    }
+    .row:nth-child(1) {
+      // line-height: 3.4rem;
+      .col:nth-child(2) {
+        text-align: right;
+        margin-top: 0.4rem;
+        justify-content: flex-end;
+      }
+    }
+    .row:nth-child(2) {
+      // line-height: 3.4rem;
+      .col:nth-child(2) {
+        text-align: right;
+        margin-top: 0.4rem;
+        justify-content: flex-end;
+      }
+    }
+    input {
+      border: 0;
+      width: 100%;
+      padding-top: 1rem;
+      margin: 0;
+      border-top: 0.54px solid #f0f1f5;
+    }
+    .col {
+      display: flex;
+      // justify-content: space-between;
+      align-items: center;
+    }
+  }
+  .grid2 {
+    height: 9rem;
+    .row:nth-child(1) {
+      line-height: 3.4rem;
+    }
+    .cols {
+      height: 3rem;
+      border-top: 0.54px solid #f0f1f5;
+      margin-top: 0rem;
+    }
+    .input {
+      border: 0;
+      width: 85%;
+      height: 3rem;
+      margin-top: 0.2rem;
+    }
+    .row:nth-child(2) {
+      .col:nth-child(1) {
+        img {
+          position: absolute;
+          bottom: 0.2rem;
+          width: 1.5rem;
+          height: 1.5rem;
+          margin: 0;
+        }
+        img:nth-child(2) {
+          right: 3.5rem;
+          top: 1.3rem;
+        }
+        img:nth-child(3) {
+          right: 1rem;
+        }
+      }
+    }
+  }
+  .bottom {
+    width: 100%;
+    margin-top: 2rem;
+    p {
+      font-size: 1.3rem;
+      color: #bcbec9;
+    }
+    button {
+      display: block;
+      width: 100%;
+      height: 4rem;
+      margin: 0rem auto;
+      border-radius: 0.5rem;
+      font-size: 1.5rem;
+      background: linear-gradient(to right, #5a91fb, #3b7bf6);
+      color: #ffffff;
+    }
+  }
+  .text-input-ios {
+    margin: 13px 0px;
+    padding: 0;
+    width: calc(100% - 8px - 8px);
+  }
+  .logo {
+    width: 100%;
+    height: 100%;
+    padding: 0 1rem;
+    text-align: center;
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    z-index: 1111;
+    background: #181919;
+    .logo-bj {
+      width: 10rem;
+      margin-top: 5rem;
+    }
+    .pwd {
+      width: 100%;
+      height: 17rem;
+      border-radius: 5px;
+      background: #fff;
+      margin-top: 2rem;
+      position: relative;
+      .input-pwd {
+        position: absolute;
+        top: 9rem;
+        height: 5rem;
+        left: 0;
+        background: none;
+        opacity: 0;
+        z-index: 10;
+      }
+      h1 {
+        width: 90%;
+        margin-left: 1.5rem;
+        color: 000;
+        font-weight: normal;
+        border-bottom: 1px solid #f0f0f0;
+        text-align: center;
+        font-size: 1.7rem;
+        height: 6rem;
+        line-height: 6rem;
+      }
+      .y1 {
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #181919;
+        border-radius: 50%;
+        position: absolute;
+        top: 4rem;
+        left: -0.8rem;
+      }
+      .y2 {
+        width: 1.5rem;
+        height: 1.5rem;
+        background: #181919;
+        border-radius: 50%;
+        position: absolute;
+        top: 4rem;
+        right: -0.8rem;
+      }
+    }
+    .pwd1 {
+      width: 90%;
+      margin-left: 1.5rem;
+      margin-top: 2rem;
+      float: left;
+      ion-input {
+        width: 14%;
+        float: left;
+        height: 5rem;
+        margin-left: 0.6rem;
+        background: #f0f0f0;
+        border-radius: 3px;
+        font-size: 3rem;
+        text-align: center;
+      }
+    }
+    .btn {
+      width: 100%;
+      height: 4rem;
+      font-size: 1.6rem;
+      border-radius: 5px;
+      color: #fff;
+      background: linear-gradient(to right, #5a91fb, #3b7bf6);
+      margin-top: 4rem;
+    }
+    .text-input-ios {
+      margin: 9px 17px;
+      padding: 0;
+      width: calc(100% - 8px - 8px);
+    }
+  }
+  .scroll-content {
+    background: #f0f1f5;
+  }
+}

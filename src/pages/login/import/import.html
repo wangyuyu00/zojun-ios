@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ImportPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>导入钱包</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-segment [(ngModel)]="tabs">
+    <ion-segment-button value="key">
+      导入私钥
+      <div class="key_border"></div>
+    </ion-segment-button>
+    <ion-segment-button value="mnemonic">
+      导入助记词
+      <div class="word_border"></div>
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="tabs">
+    <div *ngSwitchCase="'key'">
+      <p>请输入备份的钱包私钥</p>
+      <div class="grid">
+        <textarea type="text" placeholder="请输入钱包私钥" [(ngModel)]="secret"></textarea>
+      </div>
+      <p>设置钱包密码用于保护钱包，丢失无法找回，请妥善包管好密码。</p>
+
+    </div>
+    <div *ngSwitchCase="'mnemonic'">
+      <p>请输入您备份钱包时，抄写的12个助记词（12个）单词，按照正确的顺序输入至下方，每个单词用空格分隔。</p>
+      <div class="grid_word">
+        <textarea type="text" placeholder="请按顺序依次输入，用空格分隔" [(ngModel)]="mnemonic" class="texts"></textarea>
+      </div>
+      <p>设置钱包密码用于保护钱包，丢失无法找回，请妥善保管好密码。</p>
+
+    </div>
+  </div>
+  <div class="cont">
+    <div class="input-wrap">
+      <ion-input placeholder="请输入钱包名称" type="text" [(ngModel)]="name" [attr.maxlength]="8" class="put"></ion-input>
+    </div>
+    <div class="input-wrap">
+      <ion-input placeholder="请输入交易密码" [(ngModel)]="pwd" type="{{eyeFlag1===true?'text':'password'}}" class="put">
+      </ion-input>
+      <span (click)="eyeFlag1 = !eyeFlag1">
+        <img src="../../../assets/imgs/openEye.png" alt="" *ngIf="eyeFlag1">
+        <img src="../../../assets/imgs/closeEye.png" alt="" *ngIf="!eyeFlag1">
+      </span>
+    </div>
+    <div class="input-wrap noborder">
+      <ion-input placeholder="再次输入交易密码" [(ngModel)]="rePwd" class="puts" type="{{eyeFlag2===true?'text':'password'}}">
+      </ion-input>
+      <span (click)="eyeFlag2 = !eyeFlag2">
+        <img src="../../../assets/imgs/openEye.png" alt="" *ngIf="eyeFlag2">
+        <img src="../../../assets/imgs/closeEye.png" alt="" *ngIf="!eyeFlag2">
+      </span>
+    </div>
+    <button class="submit" (click)="importWallet()">确定</button>
+  </div>
+</ion-content>

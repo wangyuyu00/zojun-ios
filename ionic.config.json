@@ -1,0 +1,12 @@
+{
+  "name": "coinbox",
+  "integrations": {
+    "cordova": {}
+  },
+  "proxies": [{
+    "path": "/zojunapi",
+    "proxyUrl": "http://5wgu3y.natappfree.cc"
+  }],
+  "type": "ionic-angular",
+  "app_id": ""
+}
