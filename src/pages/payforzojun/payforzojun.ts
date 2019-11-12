@@ -77,11 +77,15 @@ export class PayforzojunPage {
 			this.user = user;
 		});
 		this.getSubChainBalance();
-		this.storage.get("parameter").then(parameter => {
-			parameter = "V6bOFwm3ngMLdDxXdPXGtN38HTDIQNNtNdy7lsQbO61syjERevjOXAoPvzx7RY1joWFxeAFMLBmkVlzyvue9jQFj9Ks9G1nG+Bp023Nz1omzmcfWT7+a1tWUGJiu6oo79ORnvOeQCegap3xUU7MoVY7to0IhYaM3HlVDg0WMKLcVzo6+j5XfguxgxAO89f2+E7m5+fojCzMNukUYjd/3BNMiDFFTWcw4zw7BHjKephv9kJMzUhCh2CGmuwGObsYjIHNfKdPkiXV53wblcPMJr+w5d3/cVIjfQXae1h32v0vTn126ZFiyh8njSyAX0Kqvi/eXo9Ox+xRZr/I3KZbq1XRNbnxrFD0eCGzzqB7zcGh0C1DiCKEbHfxWATr0oqwFCQNey1T9omB0anxXrHxAJi8J75pLLTMNA1QEqZk+nn+W/fFK4tSuSQDxZntLB/F2tvAxlL7zOMuk60XMteXoXX0lpuW18Dbwx1XDKAxFpwInL63BrWPNmkuo5zS8Pb5rOd0aqSWSoIGxSLZzrDtcasGJsuu/0uVdtFWc8KjtTcOqqlCGxQiPenfRmO8Dd7/FypwN5xXWAJIaioDexigomWYrGh7sJqr2VoJXF5glMk2MEdOo9VqKV+ETg9+4DeI5lXcY5e7mmcq0+Vks9OTVowfdKxT3u/hjvKHJsih93oE=";
+		this.storage.get("parameter").then(res => {
+			let arr = res.split(',');
+			let json = {}
+			for (const key in arr) {
+				json[arr[key].split(':')[0].replace(/\'/g, "")] = arr[key].split(':')[1].replace(/\'/g, "")
+			}
+			let parameter = json;
 
 			if (parameter) {
-
 				// 生成 A 的公私钥对象 zo
 				const zo_public_key = new NodeRSA(this.zo_public_key_data);
 				zo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
@@ -105,10 +109,10 @@ export class PayforzojunPage {
 				// console.log('B 公钥加密:', encrypted);
 
 				// 解密并验签
-				const decrypted = wo_private_key.decrypt(parameter, 'utf8');
+				const decrypted = wo_private_key.decrypt(parameter["secret"], 'utf8');
 				console.log('我的 私钥解密:', decrypted);
 
-				const verify = zo_public_key.verify(decrypted, "VyOobcUC6Vq5aTT7qdoQCJNexVGGnj0SbwAJfgGcMxvrkL0yIquMYsakl3EHFHJqpW1XAQ4HPb5XhA1VVaskAP8isrQjvX6zZ4byBBl+OOCBwVyAHCrsIg8auQK9Qm56kzxPwiG0tUBPIVo9HYKjWobFA7xE3ESu1m8Udsk69rQ=", 'utf8', 'base64');
+				const verify = zo_public_key.verify(decrypted, parameter["sign"], 'utf8', 'base64');
 				// const verify = a_public_key.verify(decrypted, "Hliaaq1moSvCeDGQteRX0nfSdiZ5WP3g9/OYYPiyi1qXymhxNwIWaOMqeeX3e7RT PsZB2a9ihITc1pGo6s4cI4XYavKUYa6r/ZKDNJ2S6WkObiC854afh8TRoJOcYBSiVoWU7iPwnEv LYS2gbwlKd1kIlMuT072Yq15LyG3vqQQ=", 'utf8', 'base64');
 				console.log('你的 公钥验签:', verify);
 				this.parameter = JSON.parse(decrypted);//先做解密 再赋值
@@ -149,30 +153,24 @@ export class PayforzojunPage {
 	async Send() {
 		let secret = AppConfig.secretDec('moac', this.user.pwd, this.user.secret);
 		if (Md5.hashStr(this.pwd) == this.user.pwd) {
-			// if (this.value < this.amount) {
-			// 	alert('可用余额不足');
-			// 	return
-			// }
+			if (this.value < this.amount) {
+				alert('可用余额不足');
+				return
+			}
 			if (!this.toAddr) {
 				alert('参数解析错误 请稍后再试');
 				return
 			}
-			// let res = await this.walletProvider.SubChainSend(
-			// 	secret,
-			// 	this.toAddr,
-			// 	this.amount,
-			// 	this.info.MicroChain,
-			// 	"http://" + this.info.monitor_ip + "/rpc"
-			// );
-			let res = true;
+			let res = await this.walletProvider.SubChainSend(
+				secret,
+				this.toAddr,
+				this.amount,
+				this.info.MicroChain,
+				"http://" + this.info.monitor_ip + "/rpc"
+			);
+			// let res = true;
 			console.log(res);
 			if (res) {
-				// this.amount = "";
-				// this.toAddr = "";
-				// this.pwd = "";
-				//放到checkorderpay里面
-
-
 				//像墨客数据库提交订单信息
 				// this.http
 				// 	.post("墨客存储订单信息接口", {})

@@ -36,7 +36,8 @@ export class MyApp {
             //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
             (window as any).handleOpenURL = (url: string) => {
                 console.log('所传参数URL为', url);
-                this.parameter = url;
+                // this.parameter = url;
+                this.parameter = url.substring(url.indexOf('=') + 2, url.length - 1);
             };
             if (user) {
                 if (this.parameter == '') {
