@@ -25,7 +25,7 @@
             </ion-input>
         </div>
         <div class="input-wrap">
-            <ion-input [placeholder]="'assets.8' | translate" type="{{eyeFlag1?'text':'password'}}" [(ngModel)]="pwd">
+            <ion-input placeholder="请输入密码(8-16数字加字母组合)" type="{{eyeFlag1?'text':'password'}}" [(ngModel)]="pwd">
             </ion-input>
             <span (click)="eyeFlag1 = !eyeFlag1">
                 <img src="../../../assets/imgs/openEye.png" alt="" *ngIf="eyeFlag1">

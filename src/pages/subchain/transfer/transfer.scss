@@ -2,7 +2,6 @@ page-transfer {
   .grid {
     background: #ffffff;
     border-radius: 0.5rem;
-    //   box-shadow: #DFE0E3 0px 0px 10px;
     margin: 1rem auto;
     img {
       width: 4rem;
@@ -20,7 +19,6 @@ page-transfer {
       margin-top: 1rem;
     }
     .row:nth-child(1) {
-      // line-height: 3.4rem;
       .col:nth-child(2) {
         text-align: right;
         margin-top: 0.4rem;
@@ -36,7 +34,6 @@ page-transfer {
     }
     .col {
       display: flex;
-      // justify-content: space-between;
       align-items: center;
     }
   }

@@ -19,7 +19,7 @@ page-import {
     font-size: 1.3rem;
     line-height: 3rem;
     color: #222 !important;
-    background-color: transparent;
+    background: none !important;
   }
 
   .segment-ios .segment-button.segment-activated {
@@ -43,9 +43,7 @@ page-import {
   .store_border {
     border-bottom: 2px solid #3b7bf6;
     width: 2.3rem;
-    /* text-align: left; */
     margin: 0 auto;
-    /* text-indent: -1.6rem; */
     margin-left: 4rem;
   }
 
@@ -146,7 +144,6 @@ page-import {
     width: 100%;
     color: inherit;
     height: 6rem;
-    // margin-top: 0.4rem;
     padding-top: 0.7rem;
     padding-bottom: 0.7rem;
   }

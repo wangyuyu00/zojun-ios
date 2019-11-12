@@ -21,52 +21,13 @@
 
 .toolbar-title-ios,
 .toolbar-title {
-  // font-size: 1.6rem;
-  // color: #222222;
-  // text-align: center;
-}
-
-.back-button-ios {
-  // margin: 0;
-  // padding: 14px;
-  // width: 10rem;
-  // height: 100%;
+  font-size: 1.6rem;
+  color: #222222;
 }
 
 .back-button-icon-ios {
-  // margin: 0;
-  // text-align: left;
-  // font-size: 2.4rem;
-  // margin-left: -5rem;
-  // margin-top: 1rem;
-  // font-weight: normal;
-}
-
-//header背景颜色
-ion-header {
-  // position: relative;
-  // background: transparent;
-
-  ion-title {
-    // background: linear-gradient(to right, #ffffff, #ffffff);
-    // text-align: center;
-    // color: #222222 !important;
-    // font-size: 1.6rem;
-  }
-
-  .toolbar-ios {
-    // padding: 0 !important;
-  }
-
-  .toolbar-title-ios {
-    // padding: 14px !important;
-    // color: #222222 !important;
-  }
-
-  .toolbar-background-ios {
-    // border-color: #b2b2b2;
-    // background: #ffffff;
-  }
+  font-size: 2.4rem;
+  color: #222222;
 }
 
 //背景颜色
@@ -76,95 +37,76 @@ ion-header {
 
 // mune
 .navbar {
-  // text-align: left;
-
-  .toolbar-title-ios,
-  .toolbar-title {
-    // height: 5.7rem;
-    // text-align: left;
-    // margin: 0;
-    // color: #ffffff !important;
-    // background: #2d3037;
-    // font-size: 1.6rem !important;
-    // padding: 6px !important;
-    // line-height: 5rem;
-    // padding-left: 1.5rem !important;
+  .toolbar-ios ion-title {
+    padding: 0 20px 1px;
   }
 }
 
 .menu-scroll-content {
   .scroll-content {
-    // background: #222222 !important;
+    background: #222222 !important;
 
     .item,
     .item-ios {
-      // width: 85%;
-      // height: 7.5rem;
-      // border-radius: 0.5rem;
-      // margin: 1rem auto;
+      width: 85%;
+      height: 7.5rem;
+      border-radius: 0.5rem;
+      margin: 1rem auto;
 
       .item-inner {
-        // border: 0;
+        border: 0;
       }
 
       p {
-        // width: 80%;
-        // margin: 0;
-        // color: #ffffff;
-        // word-break: break-all;
-        // word-wrap: break-word;
-        // white-space: normal;
+        width: 80%;
+        margin: 0;
+        color: #ffffff;
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: normal;
       }
 
       p:nth-child(1) {
-        // font-size: 1.7rem;
-        // margin: 0rem 0 1rem 0;
+        font-size: 1.7rem;
+        margin: 0rem 0 1rem 0;
       }
 
       p:nth-child(2) {
-        // font-size: 1.2rem;
-        // margin-top: -1rem;
-      }
-
-      img {
-        // position: absolute;
-        // top: 1rem;
-        // right: 1rem;
-        // width: 1.5rem;
-        // height: 1.5rem;
+        font-size: 1.2rem;
+        margin-top: -1rem;
       }
     }
   }
 }
 
 .menu-footer {
-  // display: flex;
+  display: flex;
 
   button,
   .button-ios {
-    // width: 50%;
-    // padding: 0;
-    // margin: 0;
-    // height: 4.6rem;
-    // background: #2d3037;
-    // font-size: 1.5rem;
-    // color: #ffffff;
-    // text-align: center;
+    width: 50%;
+    padding: 0;
+    margin: 0;
+    height: 4.6rem;
+    background: #2d3037;
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-align: center;
   }
 
   button:nth-child(1) {
-    // border-right: 0.54px solid #ffffff;
+    border-right: 0.54px solid #ffffff;
 
     img {
-      // width: 1.7rem;
-      // margin-right: 1rem;
+      width: 1.7rem;
+      margin-right: 1rem;
     }
   }
 
   button:nth-child(2) {
     img {
-      // width: 1.5rem;
-      // margin-right: 1rem;
+      width: 1.5rem;
+      margin-right: 1rem;
     }
   }
 }
@@ -270,17 +212,3 @@ $tabImageName: "1" "2" "3" "4";
 .tab-button-icon {
   display: block !important;
 }
-
-.tabs-ios[tabsLayout="icon-hide"] .tab-button,
-.tabs-ios[tabsLayout="title-hide"] .tab-button,
-.tabs-ios .tab-button.icon-only,
-.tabs-ios .tab-button.has-title-only {
-  // padding: 0 0px;
-}
-// .header-common {
-//   padding-top: env(safe-area-inset-top);
-// }
-
-// .footer-common {
-//   padding-bottom: env(safe-area-inset-bottom);
-// }
