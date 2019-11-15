@@ -48,8 +48,6 @@
         <variable name="ANDROID_PATHPREFIX" value="/" />
     </plugin>
     <plugin name="cordova-plugin-appavailability" spec="0.4.2" />
-    <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="~4.5.5" />
     <platform name="ios">
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
@@ -84,4 +82,6 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
+    <engine name="ios" spec="4.5.5" />
+    <engine name="android" spec="6.4.0" />
 </widget>

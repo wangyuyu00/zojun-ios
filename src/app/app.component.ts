@@ -34,45 +34,53 @@ export class MyApp {
         // alert(2)
         this.storage.get('user').then((user) => {//获取当前用户
             //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
+            this.user=user;
             (window as any).handleOpenURL = (url: string) => {
                 console.log('所传参数URL为', url);
                 // this.parameter = url;
-                this.parameter = url.substring(url.indexOf('=') + 2, url.length - 1);
+                let arr:any = url.slice(15).split('&');
+                let json:any={};
+                for (const key in arr) {
+                    let subarr:any=arr[key].split('=');
+                    json[subarr[0]]=subarr[1];
+                }
+                this.parameter = JSON.stringify(json);
             };
-            if (user) {
-                if (this.parameter == '') {
-                    this.rootPage = TabsPage;
+        }).then(()=>{
+            setTimeout(() => {
+                if (this.user) {
+                    if (this.parameter == '') {
+                        this.rootPage = TabsPage;
+                    } else {
+                        this.storage.set('parameter', this.parameter);
+                        this.rootPage = 'PayforzojunPage';
+                    }
                 } else {
-                    this.storage.set('parameter', this.parameter);
-                    this.rootPage = 'PayforzojunPage';
-                }
-            } else {
-                if (this.parameter == '') {
-                    this.rootPage = 'LoginPage';
-                } else {
-                    let prompt = this.alertCtrl.create({
-                        title: '提示',
-                        message: "请先创建钱包再尝试支付操作",
-                        buttons: [
-                            {
-                                text: '返回商家',
-                                handler: data => {
-                                    //这里做返回商家处理
+                    if (this.parameter == '') {
+                        this.rootPage = 'LoginPage';
+                    } else {
+                        let prompt = this.alertCtrl.create({
+                            title: '提示',
+                            message: "请先创建钱包再尝试支付操作",
+                            buttons: [
+                                {
+                                    text: '返回商家',
+                                    handler: data => {
+                                        //这里做返回商家处理
+                                    }
                                 }
-                            }
-                        ]
-                    });
-                    prompt.present();
-                    // this.rootPage = 'LoginPage';
-                }
-            }
+                            ]
+                        });
+                        prompt.present();
+                        // this.rootPage = 'LoginPage';
+                    }
+                } 
+            }, 1000);
         });
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
-
-
             this.initTranslateConfig();//初始化中文
             statusBar.styleDefault();
             splashScreen.hide();

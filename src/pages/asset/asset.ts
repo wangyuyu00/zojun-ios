@@ -77,7 +77,13 @@ export class AssetPage extends BaseUI {
             this.getPockets();//获取所有钱包
             this.getSubChainBalance();
         }, 1000);
-
+        // const key = new NodeRSA({ b: 1024 });
+        // const pkcsType = 'pkcs1';
+        // key.setOptions({ encryptionScheme: pkcsType });
+        // const publicPem = key.exportKey(pkcsType + '-public-pem');//制定输出格式
+        // const privatePem = key.exportKey(pkcsType + '-private-pem');
+        // console.log(pkcsType + '公钥:\n', publicPem);
+        // console.log(pkcsType + '私钥:\n', privatePem);
     }
 
     ionViewDidLoad() {
@@ -97,6 +103,8 @@ export class AssetPage extends BaseUI {
                 if (p.length != this.pockets.length) {
                     this.pockets = p;
                 }
+                // this.user = p[0];
+                // this.storage.set('user',this.user);
             }
         })
     }
@@ -173,6 +181,7 @@ export class AssetPage extends BaseUI {
         } catch (e) {
             that.tokens = [];
         }
+        // this.tokens = await this.walletProvider.getMoacAndTokenBalances(this.user.address,this.ERC20) || [];
 
     }
     async getCollectionBalances() {//获得ERC721收藏品的余额
@@ -193,6 +202,7 @@ export class AssetPage extends BaseUI {
         } catch (e) {
             that.collections = [];
         }
+        // this.collections = await this.walletProvider.getCollectionBalances(this.user.address,this.ERC721) || [];
 
     }
     slideChanged() {//切换钱包
@@ -204,17 +214,26 @@ export class AssetPage extends BaseUI {
         this.storage.set('user', this.user);
         this.tabs = 'pass';
         this.getMoacAndTokenBalances();
+        this.getSubChainBalance();
     }
     toTokenDetails(item) {//去通证详情
+        // if(item.value == 0){
+        //     this.errorMsg('暂无余额');
+        // }else{
         this.navCtrl.push('TokendetailsPage', {
             'item': item
         });
+        // }
     }
     toCollectionDetails(item) {//去收藏品详情
+        // if(item.value == 0){
+        //     this.errorMsg('暂无余额');
+        // }else{
         this.navCtrl.push('CollectionlistPage', {
             'item': item,
             'user': this.user
         });
+        // }
     }
     jump(item) {
         if (item != '') {
@@ -270,10 +289,6 @@ export class AssetPage extends BaseUI {
 
 
     }
-
-
-
-
 
     toTrade(val) {//去往子链详情 充币提币页面
         this.navCtrl.push("TradePage", {

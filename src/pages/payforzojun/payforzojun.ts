@@ -35,9 +35,10 @@ export class PayforzojunPage {
 
 	zo_public_key_data: any = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2/fxN1X/ArB/EDDU2eu2bwH4f8ly7x4vXb7eQYqEPRKGZrj5zXoX0LUO+N8NS520X9kehW6GzlWEJDQf/5W+X391YZArKgycDyHyWqb4LNeP6H8eRWyOZqOT2eZIuh7rqYMSIWSHFzs0IKy/xeNqvTM66Nb+YOSiEO42NMRxGPQIDAQAB-----END PUBLIC KEY-----';
 	zo_private_key_data: any = '-----BEGIN PRIVATE KEY-----MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALb9/E3Vf8CsH8QMNTZ67ZvAfh/yXLvHi9dvt5BioQ9EoZmuPnNehfQtQ743w1LnbRf2R6FbobOVYQkNB//lb5ff3VhkCsqDJwPIfJapvgs14/ofx5FbI5mo5PZ5ki6HuupgxIhZIcXOzQgrL/F42q9Mzro1v5g5KIQ7jY0xHEY9AgMBAAECgYBEUzUfgrX+pMX/l2dO/js1ynvNRdsmKe2m9QmfGZR1dPS5wvuCbCqr7zK6FWwSymJLbiN0thf8S6w9iuYPwAUYGFXQQDuge8XyjpIKyeuOv1um9SBvxaS66KlmShGSX+yxj//KtepNL4lokwSlw9sT5jlCWdsCaS6vS6UDvM3HKQJBANone/wfAvkDZiKdsqcwwgchcu3ZOwa8Yncht2CTUZxFUy//rObHEq9mY+uQCU6rEUbymhiOXQREs5vIMF95VU8CQQDWvOf0jLdUgeo5CnXTqJWLTPnj1GHxAswtOBLkRQPdIu1IpkfKxEob4Ss+NcDdc07AMXIfcBU6cbFXBDPaOGCzAkEAqA9y/LAHYj60GEbUsuhlEYk7OPD5AB9w28Ylt0jGvlTJ2VhmowMJ6gY/Q+IayXgQP0/2VqSWFAu5MnHukh6vEQJAMvX30jiG1X5TWKAb4FQ00S8+aowfhjPUwrJ5AUVDqno8d65GgV9d+wnP2l6lW6ieusvBOqa90vXiUTVFHPeeMwJAAPEsulihaWlNZBG2yDNXvs2VvASJcUUsAkOPxLM64fNf59DnXBfit7Z+q3TUXDp3tUff/4ufxerdQjSfYd83aQ==-----END PRIVATE KEY-----';
-	parameter: any;//存在本地的中君的请求参数 解密的
+	parameter: any={};//存在本地的中君的请求参数 解密的
 	checkorderdetails: any = {};//订单校验返回的收款地址 截止时间 appName
 	notifyOrderPay: string = '';//回调通知的接口名称
+	HASH:string='';//支付结果  返回给中君的
 	info: any = {
 		MicroChain: "0xac7c54e2b6bae6768bbc90afc51b022e9200a4dc",
 		ScsCount: 8,
@@ -78,47 +79,47 @@ export class PayforzojunPage {
 		});
 		this.getSubChainBalance();
 		this.storage.get("parameter").then(res => {
-			let arr = res.split(',');
-			let json = {}
-			for (const key in arr) {
-				json[arr[key].split(':')[0].replace(/\'/g, "")] = arr[key].split(':')[1].replace(/\'/g, "")
-			}
-			let parameter = json;
-
-			if (parameter) {
-				// 生成 A 的公私钥对象 zo
-				const zo_public_key = new NodeRSA(this.zo_public_key_data);
-				zo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
-				zo_public_key.setOptions({
-					"signingScheme": 'sha1'
-				});
-				const zo_private_key = new NodeRSA(this.zo_private_key_data);
-				zo_private_key.setOptions({ encryptionScheme: 'pkcs1' });
-
-				// 生成 B 的公私钥对象 wo
-				const wo_public_key = new NodeRSA(this.wo_public_key_data);
-				wo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
-				const wo_private_key = new NodeRSA(this.wo_private_key_data);
-				wo_private_key.setOptions({ encryptionScheme: 'pkcs1' });
-
-				// // 加签并加密
-				// const sign = a_private_key.sign(text, 'base64', 'utf8');
-				// console.log('A 私钥加签:', sign);
-
-				// const encrypted = b_public_key.encrypt(text, 'base64');
-				// console.log('B 公钥加密:', encrypted);
-
-				// 解密并验签
-				const decrypted = wo_private_key.decrypt(parameter["secret"], 'utf8');
-				console.log('我的 私钥解密:', decrypted);
-
-				const verify = zo_public_key.verify(decrypted, parameter["sign"], 'utf8', 'base64');
-				// const verify = a_public_key.verify(decrypted, "Hliaaq1moSvCeDGQteRX0nfSdiZ5WP3g9/OYYPiyi1qXymhxNwIWaOMqeeX3e7RT PsZB2a9ihITc1pGo6s4cI4XYavKUYa6r/ZKDNJ2S6WkObiC854afh8TRoJOcYBSiVoWU7iPwnEv LYS2gbwlKd1kIlMuT072Yq15LyG3vqQQ=", 'utf8', 'base64');
-				console.log('你的 公钥验签:', verify);
-				this.parameter = JSON.parse(decrypted);//先做解密 再赋值
-				this.amount = this.parameter.orderAmount;
-				this.checkOrder();
-			}
+			console.log(res)
+			this.parameter = JSON.parse(res);
+		
+		}).then(()=>{
+			setTimeout(() => {
+				if (this.parameter) {
+					// 生成 A 的公私钥对象 zo
+					console.log('this.parameter 存在',this.parameter)
+					const zo_public_key = new NodeRSA(this.zo_public_key_data);
+					zo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
+					zo_public_key.setOptions({
+						"signingScheme": 'sha1'
+					});
+					const zo_private_key = new NodeRSA(this.zo_private_key_data);
+					zo_private_key.setOptions({ encryptionScheme: 'pkcs1' });
+	
+					// 生成 B 的公私钥对象 wo
+					const wo_public_key = new NodeRSA(this.wo_public_key_data);
+					wo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
+					const wo_private_key = new NodeRSA(this.wo_private_key_data);
+					wo_private_key.setOptions({ encryptionScheme: 'pkcs1' });
+	
+					// // 加签并加密
+					// const sign = a_private_key.sign(text, 'base64', 'utf8');
+					// console.log('A 私钥加签:', sign);
+	
+					// const encrypted = b_public_key.encrypt(text, 'base64');
+					// console.log('B 公钥加密:', encrypted);
+					console.log('this.parameter["secret"]', this.parameter["secret"]);
+					// 解密并验签
+					const decrypted = wo_private_key.decrypt(this.parameter["secret"], 'utf8');
+					console.log('我的 私钥解密:', decrypted);
+	
+					const verify = zo_public_key.verify(decrypted, this.parameter["sign"], 'utf8', 'base64');
+					// const verify = a_public_key.verify(decrypted, "Hliaaq1moSvCeDGQteRX0nfSdiZ5WP3g9/OYYPiyi1qXymhxNwIWaOMqeeX3e7RT PsZB2a9ihITc1pGo6s4cI4XYavKUYa6r/ZKDNJ2S6WkObiC854afh8TRoJOcYBSiVoWU7iPwnEv LYS2gbwlKd1kIlMuT072Yq15LyG3vqQQ=", 'utf8', 'base64');
+					console.log('你的 公钥验签:', verify);
+					this.parameter = JSON.parse(decrypted);//先做解密 再赋值
+					this.amount = this.parameter.orderAmount;
+					this.checkOrder();
+				}
+			}, 1000);
 		});
 
 	}
@@ -161,7 +162,7 @@ export class PayforzojunPage {
 				alert('参数解析错误 请稍后再试');
 				return
 			}
-			let res = await this.walletProvider.SubChainSend(
+			let res:any = await this.walletProvider.SubChainSend(
 				secret,
 				this.toAddr,
 				this.amount,
@@ -169,7 +170,8 @@ export class PayforzojunPage {
 				"http://" + this.info.monitor_ip + "/rpc"
 			);
 			// let res = true;
-			console.log(res);
+			this.HASH = res;
+			console.log('子链支付返回结果',res);
 			if (res) {
 				//像墨客数据库提交订单信息
 				// this.http
@@ -188,6 +190,7 @@ export class PayforzojunPage {
 				//异步回调
 
 				//同步回调
+				// this.navCtrl.
 				// this.turnApp();
 
 
@@ -230,7 +233,7 @@ export class PayforzojunPage {
 			version: "1.0.0"
 		}
 		this.http
-			.post("/zojunapi/checkOrder", this.transformRequest(data), {
+			.post("https://lock.utools.club/zqpay.trade.checkOrder", this.transformRequest(data), {
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded",
 				}
@@ -283,7 +286,7 @@ export class PayforzojunPage {
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http
-			.post("/zojunapi/checkOrderPay", this.transformRequest(data), {
+			.post("https://lock.utools.club/zqpay.trade.checkOrderPay", this.transformRequest(data), {
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded",
 				}
@@ -304,8 +307,8 @@ export class PayforzojunPage {
 						this.notifyOrderPay = url.substring(url.lastIndexOf('/'))
 						console.log('notifyOrderPay', this.notifyOrderPay);
 
-						let hash = 'teststststststhash';
-						this.postNotifyOrderPay(hash);
+						// let hash = 'teststststststhash';
+						this.postNotifyOrderPay(this.HASH);
 					}
 				}
 			);
@@ -345,7 +348,7 @@ export class PayforzojunPage {
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http
-			.post("/zojunapi" + this.notifyOrderPay, this.transformRequest(data), {
+			.post("https://lock.utools.club/" + this.notifyOrderPay, this.transformRequest(data), {
 				headers: {
 					"Content-Type": "application/x-www-form-urlencoded",
 				}

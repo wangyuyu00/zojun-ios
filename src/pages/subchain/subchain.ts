@@ -42,7 +42,7 @@ export class SubchainPage extends BaseUI {
     //获取子链列表
     try {
       this.http
-        .post("https://mobao.halobtc.com/api/scsList", {
+        .post("https://mobao.coinpany.cn/api/scsList", {
           page: this.page
         })
         .subscribe(data => {
@@ -61,7 +61,7 @@ export class SubchainPage extends BaseUI {
     //获取子链轮播
     try {
       this.http
-        .get("https://mobao.halobtc.com/api/scsFlashList")
+        .get("https://mobao.coinpany.cn/api/scsFlashList")
         .subscribe(data => {
           // console.log('data',typeof(data.data));
           // let res = JSON.parse(data)

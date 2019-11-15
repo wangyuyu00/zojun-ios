@@ -78,7 +78,7 @@ export class WalletProvider {
 	}
 	getTokens() {
 		this.http
-			.get("https://mobao.halobtc.com/api/tokens", {})
+			.get("https://mobao.coinpany.cn/api/tokens", {})
 			.subscribe(
 				data => {
 					let res = JSON.stringify(data);
