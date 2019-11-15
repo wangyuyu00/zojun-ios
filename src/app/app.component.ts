@@ -21,7 +21,7 @@ export class MyApp {
     pockets: any = [];
     user: any = {};
     lang: string = 'zh';
-    parameter: string = '';//中君传的参数
+    parameter: string = null;//中君传的参数
     constructor(
         private app: App,
         platform: Platform,
@@ -49,34 +49,37 @@ export class MyApp {
                     console.log('处理好的 参数',this.parameter)
                 };
             }).then(()=>{
-                setTimeout(() => {
+                let timer:any=setInterval(() => {
                     console.log('判断入口时候的参数',this.parameter)
-                    if (this.user) {
-                        if (this.parameter == '') {
-                            this.rootPage = TabsPage;
-                        } else {
-                            this.storage.set('parameter', this.parameter);
-                            this.rootPage = 'PayforzojunPage';
-                        }
-                    }else {
-                        if (this.parameter == '') {
-                            this.rootPage = 'LoginPage';
-                        } else {
-                            let prompt = this.alertCtrl.create({
-                                title: '提示',
-                                message: "请先创建钱包再尝试支付操作",
-                                buttons: [
-                                    {
-                                        text: '返回商家',
-                                        handler: data => {
-                                            //这里做返回商家处理
+                    if(this.parameter !== null){
+                        if (this.user) {
+                            if (this.parameter == '') {
+                                this.rootPage = TabsPage;
+                            } else {
+                                this.storage.set('parameter', this.parameter);
+                                this.rootPage = 'PayforzojunPage';
+                            }
+                        }else {
+                            if (this.parameter == '') {
+                                this.rootPage = 'LoginPage';
+                            } else {
+                                let prompt = this.alertCtrl.create({
+                                    title: '提示',
+                                    message: "请先创建钱包再尝试支付操作",
+                                    buttons: [
+                                        {
+                                            text: '返回商家',
+                                            handler: data => {
+                                                //这里做返回商家处理
+                                            }
                                         }
-                                    }
-                                ]
-                            });
-                            prompt.present();
-                            // this.rootPage = 'LoginPage';
+                                    ]
+                                });
+                                prompt.present();
+                                // this.rootPage = 'LoginPage';
+                            }
                         }
+                        clearInterval(timer);
                     }
                 }, 1000);
             });
