@@ -21,7 +21,7 @@ export class MyApp {
     pockets: any = [];
     user: any = {};
     lang: string = 'zh';
-    parameter: string = null;//中君传的参数
+    parameter: string = '';//中君传的参数
     constructor(
         private app: App,
         platform: Platform,
@@ -32,14 +32,11 @@ export class MyApp {
         private menuCtrl: MenuController,
         splashScreen: SplashScreen,
         private translate: TranslateService) {
-        // alert(2)
-        this.storage.get('user').then((user) => {//获取当前用户
-            //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
-            this.user=user;
-            (window as any).handleOpenURL = (url: string) => {
-                console.log('所传参数URL为', url);
-                // this.parameter = url;
-                if(url){
+            this.storage.get('user').then((user) => {//获取当前用户
+                //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
+                this.user= user;
+                (window as any).handleOpenURL = (url: string) => {
+                    console.log('所传参数URL为', url);
                     let arr:any = url.slice(15).split('&');
                     let json:any={};
                     for (const key in arr) {
@@ -49,16 +46,11 @@ export class MyApp {
                         json[keys]=value;
                     }
                     this.parameter = JSON.stringify(json);
-                }else{
-                    this.parameter = '';
-                }
-                console.log('handleOpenURL',this.parameter);
-            };
-        }).then(()=>{
-            console.log('then',this.parameter);
-            let timer:any = setInterval(()=>{
-                console.log('timer',this.parameter);
-                if(this.parameter !== null){
+                    console.log('处理好的 参数',this.parameter)
+                };
+            }).then(()=>{
+                setTimeout(() => {
+                    console.log('判断入口时候的参数',this.parameter)
                     if (this.user) {
                         if (this.parameter == '') {
                             this.rootPage = TabsPage;
@@ -66,7 +58,7 @@ export class MyApp {
                             this.storage.set('parameter', this.parameter);
                             this.rootPage = 'PayforzojunPage';
                         }
-                    } else {
+                    }else {
                         if (this.parameter == '') {
                             this.rootPage = 'LoginPage';
                         } else {
@@ -85,11 +77,9 @@ export class MyApp {
                             prompt.present();
                             // this.rootPage = 'LoginPage';
                         }
-                    } 
-                    clearInterval(timer);
-                }
-            },100)
-        });
+                    }
+                }, 1000);
+            });
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
