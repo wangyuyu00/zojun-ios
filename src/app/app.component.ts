@@ -43,8 +43,10 @@ export class MyApp {
                     let arr:any = url.slice(15).split('&');
                     let json:any={};
                     for (const key in arr) {
-                        let subarr:any=arr[key].split('=');
-                        json[subarr[0]]=subarr[1];
+                        let keys:any=arr[key].slice(0,arr[key].indexOf('='));
+                        let value:any=arr[key].slice(arr[key].indexOf('=')+1);
+                        // let subarr:any=arr[key].split('=');
+                        json[keys]=value;
                     }
                     this.parameter = JSON.stringify(json);
                 }else{
