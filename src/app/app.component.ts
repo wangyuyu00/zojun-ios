@@ -21,7 +21,7 @@ export class MyApp {
     pockets: any = [];
     user: any = {};
     lang: string = 'zh';
-    parameter: string = null;//中君传的参数
+    parameter: string = '';//中君传的参数
     constructor(
         private app: App,
         platform: Platform,
@@ -32,7 +32,54 @@ export class MyApp {
         private menuCtrl: MenuController,
         splashScreen: SplashScreen,
         private translate: TranslateService) {
-            this.toTabs();
+            this.storage.get('user').then((user) => {//获取当前用户
+                //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
+                this.user= user;
+                (window as any).handleOpenURL = (url: string) => {
+                    console.log('所传参数URL为', url);
+                    let arr:any = url.slice(15).split('&');
+                    let json:any={};
+                    for (const key in arr) {
+                        let keys:any=arr[key].slice(0,arr[key].indexOf('='));
+                        let value:any=arr[key].slice(arr[key].indexOf('=')+1);
+                        // let subarr:any=arr[key].split('=');
+                        json[keys]=value;
+                    }
+                    this.parameter = JSON.stringify(json);
+                    console.log('处理好的 参数',this.parameter)
+                };
+            }).then(()=>{
+                setTimeout(() => {
+                    console.log('判断入口时候的参数',this.parameter)
+                    if (this.user) {
+                        if (this.parameter == '') {
+                            this.rootPage = TabsPage;
+                        } else {
+                            this.storage.set('parameter', this.parameter);
+                            this.rootPage = 'PayforzojunPage';
+                        }
+                    }else {
+                        if (this.parameter == '') {
+                            this.rootPage = 'LoginPage';
+                        } else {
+                            let prompt = this.alertCtrl.create({
+                                title: '提示',
+                                message: "请先创建钱包再尝试支付操作",
+                                buttons: [
+                                    {
+                                        text: '返回商家',
+                                        handler: data => {
+                                            //这里做返回商家处理
+                                        }
+                                    }
+                                ]
+                            });
+                            prompt.present();
+                            // this.rootPage = 'LoginPage';
+                        }
+                    }
+                }, 1000);
+            });
 
         platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
@@ -83,73 +130,7 @@ export class MyApp {
             }
         })
     }
-    async toTabs(){
-        if(await this.storage.get('user')){
-            this.user =  await this.storage.get('user');
-        }
-        if(await ((window as any).handleOpenURL = (url: string) => {
-            console.log('所传参数URL为', url);
-            let arr:any = url.slice(15).split('&');
-            let json:any={};
-            for (const key in arr) {
-                let keys:any=arr[key].slice(0,arr[key].indexOf('='));
-                let value:any=arr[key].slice(arr[key].indexOf('=')+1);
-                // let subarr:any=arr[key].split('=');
-                json[keys]=value;
-            }
-            this.parameter = JSON.stringify(json);
-            console.log('处理好的 参数',this.parameter)
-            return JSON.stringify(json);
-        })){
-            this.parameter = '';
-        }
-        console.log(this.parameter)
-        if(this.parameter !== null){
-            if (this.user) {
-                if (this.parameter == '') {
-                    this.rootPage = TabsPage;
-                } else {
-                    this.storage.set('parameter', this.parameter);
-                    this.rootPage = 'PayforzojunPage';
-                }
-            }else {
-                if (this.parameter == '') {
-                    this.rootPage = 'LoginPage';
-                } else {
-                    let prompt = this.alertCtrl.create({
-                        title: '提示',
-                        message: "请先创建钱包再尝试支付操作",
-                        buttons: [
-                            {
-                                text: '返回商家',
-                                handler: data => {
-                                    //这里做返回商家处理
-                                }
-                            }
-                        ]
-                    });
-                    prompt.present();
-                    // this.rootPage = 'LoginPage';
-                }
-            }
-        }
-    }
-    // async getHandleOpenURL(){
-    //     (window as any).handleOpenURL = (url: string) => {
-    //         console.log('所传参数URL为', url);
-    //         let arr:any = url.slice(15).split('&');
-    //         let json:any={};
-    //         for (const key in arr) {
-    //             let keys:any=arr[key].slice(0,arr[key].indexOf('='));
-    //             let value:any=arr[key].slice(arr[key].indexOf('=')+1);
-    //             // let subarr:any=arr[key].split('=');
-    //             json[keys]=value;
-    //         }
-    //         // this.parameter = JSON.stringify(json);
-    //         console.log('处理好的 参数',this.parameter)
-    //         return JSON.stringify(json);
-    //     };
-    // }
+
     jump(item) {
         if (item != '') {
             this.app.getRootNav().push(item);
