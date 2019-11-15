@@ -50,10 +50,12 @@ export class MyApp {
                 }else{
                     this.parameter = '';
                 }
-                
+                console.log('handleOpenURL',this.parameter);
             };
         }).then(()=>{
+            console.log('then',this.parameter);
             let timer:any = setInterval(()=>{
+                console.log('timer',this.parameter);
                 if(this.parameter !== null){
                     if (this.user) {
                         if (this.parameter == '') {
