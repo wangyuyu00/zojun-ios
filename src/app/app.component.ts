@@ -11,6 +11,7 @@ import { ImportPage } from '../pages/login/import/import'
 import { SetpwdPage } from '../pages/login/setpwd/setpwd'
 import { TranslateService } from "@ngx-translate/core";
 import VConsole from 'vconsole';
+import { setInterval, clearInterval } from 'timers';
 var vConsole = new VConsole();
 @Component({
     templateUrl: 'app.html'
@@ -20,7 +21,7 @@ export class MyApp {
     pockets: any = [];
     user: any = {};
     lang: string = 'zh';
-    parameter: string = '';//中君传的参数
+    parameter: string = null;//中君传的参数
     constructor(
         private app: App,
         platform: Platform,
@@ -38,44 +39,52 @@ export class MyApp {
             (window as any).handleOpenURL = (url: string) => {
                 console.log('所传参数URL为', url);
                 // this.parameter = url;
-                let arr:any = url.slice(15).split('&');
-                let json:any={};
-                for (const key in arr) {
-                    let subarr:any=arr[key].split('=');
-                    json[subarr[0]]=subarr[1];
+                if(url){
+                    let arr:any = url.slice(15).split('&');
+                    let json:any={};
+                    for (const key in arr) {
+                        let subarr:any=arr[key].split('=');
+                        json[subarr[0]]=subarr[1];
+                    }
+                    this.parameter = JSON.stringify(json);
+                }else{
+                    this.parameter = '';
                 }
-                this.parameter = JSON.stringify(json);
+                
             };
         }).then(()=>{
-            setTimeout(() => {
-                if (this.user) {
-                    if (this.parameter == '') {
-                        this.rootPage = TabsPage;
+            let timer:any = setInterval(()=>{
+                if(this.parameter !== null){
+                    if (this.user) {
+                        if (this.parameter == '') {
+                            this.rootPage = TabsPage;
+                        } else {
+                            this.storage.set('parameter', this.parameter);
+                            this.rootPage = 'PayforzojunPage';
+                        }
                     } else {
-                        this.storage.set('parameter', this.parameter);
-                        this.rootPage = 'PayforzojunPage';
-                    }
-                } else {
-                    if (this.parameter == '') {
-                        this.rootPage = 'LoginPage';
-                    } else {
-                        let prompt = this.alertCtrl.create({
-                            title: '提示',
-                            message: "请先创建钱包再尝试支付操作",
-                            buttons: [
-                                {
-                                    text: '返回商家',
-                                    handler: data => {
-                                        //这里做返回商家处理
+                        if (this.parameter == '') {
+                            this.rootPage = 'LoginPage';
+                        } else {
+                            let prompt = this.alertCtrl.create({
+                                title: '提示',
+                                message: "请先创建钱包再尝试支付操作",
+                                buttons: [
+                                    {
+                                        text: '返回商家',
+                                        handler: data => {
+                                            //这里做返回商家处理
+                                        }
                                     }
-                                }
-                            ]
-                        });
-                        prompt.present();
-                        // this.rootPage = 'LoginPage';
-                    }
-                } 
-            }, 1000);
+                                ]
+                            });
+                            prompt.present();
+                            // this.rootPage = 'LoginPage';
+                        }
+                    } 
+                    clearInterval(timer);
+                }
+            },100)
         });
 
         platform.ready().then(() => {
