@@ -32,11 +32,14 @@ export class MyApp {
         private menuCtrl: MenuController,
         splashScreen: SplashScreen,
         private translate: TranslateService) {
+        
+            console.log('app 打开时间戳',new Date().getTime())
             this.storage.get('user').then((user) => {//获取当前用户
                 //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
                 this.user= user;
                 (window as any).handleOpenURL = (url: string) => {
                     console.log('所传参数URL为', url);
+                    console.log('收到参数时间戳',new Date().getTime())
                     let arr:any = url.slice(15).split('&');
                     let json:any={};
                     for (const key in arr) {
@@ -50,6 +53,7 @@ export class MyApp {
                 };
             }).then(()=>{
                 setTimeout(() => {
+                    console.log('判断入口时间戳',new Date().getTime())
                     console.log('判断入口时候的参数',this.parameter)
                     if (this.user) {
                         if (this.parameter == '') {
