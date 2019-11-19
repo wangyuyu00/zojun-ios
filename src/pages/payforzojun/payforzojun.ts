@@ -233,11 +233,7 @@ export class PayforzojunPage {
 			version: "1.0.0"
 		}
 		this.http
-			.post("https://lock.utools.club/zqpay.trade.checkOrder", this.transformRequest(data), {
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-				}
-			})
+			.post("https://lock.utools.club/zqpay.trade.checkOrder", data)
 			.subscribe(
 				data => {
 					let res = JSON.stringify(data);
@@ -286,11 +282,7 @@ export class PayforzojunPage {
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http
-			.post("https://lock.utools.club/zqpay.trade.checkOrderPay", this.transformRequest(data), {
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-				}
-			})
+			.post("https://lock.utools.club/zqpay.trade.checkOrderPay",data)
 			.subscribe(
 				data => {
 					let res = JSON.stringify(data);
@@ -348,11 +340,7 @@ export class PayforzojunPage {
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http
-			.post("https://lock.utools.club/" + this.notifyOrderPay, this.transformRequest(data), {
-				headers: {
-					"Content-Type": "application/x-www-form-urlencoded",
-				}
-			})
+			.post("https://lock.utools.club/" + this.notifyOrderPay, data)
 			.subscribe(
 				data => {
 					let res = JSON.stringify(data);
