@@ -1,4 +1,5 @@
 declare let window: any;
+declare var startApp;
 import { Component, NgZone } from '@angular/core';
 import { App, Platform, MenuController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -20,6 +21,7 @@ export class MyApp {
     rootPage: any;
     pockets: any = [];
     user: any = {};
+    parameterobj: any = {};
     lang: string = 'zh';
     parameter: string = '';//中君传的参数
     constructor(
@@ -45,6 +47,7 @@ export class MyApp {
                         // let subarr:any=arr[key].split('=');
                         json[keys]=value;
                     }
+                    this.parameterobj=json;
                     this.parameter = JSON.stringify(json);
                     console.log('处理好的 参数',this.parameter)
                 };
@@ -75,6 +78,13 @@ export class MyApp {
                                         text: '返回商家',
                                         handler: data => {
                                             //这里做返回商家处理
+                                            let parameter={
+                                                code:-1,
+                                                message:"钱包内无账户,请先创建账户再使用"
+                                            }
+                                            let uri = this.parameterobj['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.parameterobj['paySource']+'&payMoney='+this.parameterobj['payMoney']+'&payType='+this.parameterobj['payType']+'&schemes='+this.parameterobj['schemes'];
+                                            console.log('uri',uri)
+                                            this.turnApp(uri);
                                         }
                                     }
                                 ]
@@ -93,6 +103,29 @@ export class MyApp {
             statusBar.styleDefault();
             splashScreen.hide();
         });
+    }
+    turnApp(uri) {
+        // "package": "io.moac.mobao",
+		try {
+			let mobaoApp = startApp.set({
+                "action": "ACTION_VIEW",
+                "category": "CATEGORY_DEFAULT",
+                "type": "text/css",
+                "uri": uri,
+                "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
+                "intentstart": "startActivity",
+            }, {
+                    "EXTRA_STREAM": "extraValue1",
+                    "extraKey2": "extraValue2"
+                });
+            mobaoApp.start(function () {
+                console.log("sApp.start succeed");
+            }, function (error) {
+                alert("error---" + error);
+            });
+		} catch (error) {
+			console.log(error);
+		}
     }
     //语言设置
     initTranslateConfig() {

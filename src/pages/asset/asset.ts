@@ -41,7 +41,7 @@ export class AssetPage extends BaseUI {
         erc20_address: "0x383811667cE9646E8bCE8aff8Ca049751dbeC64B",
         erc20_symbol: "CKT",
         subchain_address: "0xac7c54e2b6bae6768bbc90afc51b022e9200a4dc",
-        icon: "http://trusting.halobtc.com/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
+        icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
         is_token: 1,
         monitor_ip: "47.110.129.12:50068",
         name: "卡巴子链",
@@ -55,7 +55,7 @@ export class AssetPage extends BaseUI {
         describe: "区块链上的新能源汽车子链",
         id: 1,
         main_account: "",
-        token_icon: "http://trusting.halobtc.com/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
+        token_icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
         updatedAt: 1560138262967,
     };
     Tokens: any; //storage里面的token

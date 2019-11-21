@@ -36,6 +36,7 @@ export class PayforzojunPage {
 	zo_public_key_data: any = '-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2/fxN1X/ArB/EDDU2eu2bwH4f8ly7x4vXb7eQYqEPRKGZrj5zXoX0LUO+N8NS520X9kehW6GzlWEJDQf/5W+X391YZArKgycDyHyWqb4LNeP6H8eRWyOZqOT2eZIuh7rqYMSIWSHFzs0IKy/xeNqvTM66Nb+YOSiEO42NMRxGPQIDAQAB-----END PUBLIC KEY-----';
 	zo_private_key_data: any = '-----BEGIN PRIVATE KEY-----MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALb9/E3Vf8CsH8QMNTZ67ZvAfh/yXLvHi9dvt5BioQ9EoZmuPnNehfQtQ743w1LnbRf2R6FbobOVYQkNB//lb5ff3VhkCsqDJwPIfJapvgs14/ofx5FbI5mo5PZ5ki6HuupgxIhZIcXOzQgrL/F42q9Mzro1v5g5KIQ7jY0xHEY9AgMBAAECgYBEUzUfgrX+pMX/l2dO/js1ynvNRdsmKe2m9QmfGZR1dPS5wvuCbCqr7zK6FWwSymJLbiN0thf8S6w9iuYPwAUYGFXQQDuge8XyjpIKyeuOv1um9SBvxaS66KlmShGSX+yxj//KtepNL4lokwSlw9sT5jlCWdsCaS6vS6UDvM3HKQJBANone/wfAvkDZiKdsqcwwgchcu3ZOwa8Yncht2CTUZxFUy//rObHEq9mY+uQCU6rEUbymhiOXQREs5vIMF95VU8CQQDWvOf0jLdUgeo5CnXTqJWLTPnj1GHxAswtOBLkRQPdIu1IpkfKxEob4Ss+NcDdc07AMXIfcBU6cbFXBDPaOGCzAkEAqA9y/LAHYj60GEbUsuhlEYk7OPD5AB9w28Ylt0jGvlTJ2VhmowMJ6gY/Q+IayXgQP0/2VqSWFAu5MnHukh6vEQJAMvX30jiG1X5TWKAb4FQ00S8+aowfhjPUwrJ5AUVDqno8d65GgV9d+wnP2l6lW6ieusvBOqa90vXiUTVFHPeeMwJAAPEsulihaWlNZBG2yDNXvs2VvASJcUUsAkOPxLM64fNf59DnXBfit7Z+q3TUXDp3tUff/4ufxerdQjSfYd83aQ==-----END PRIVATE KEY-----';
 	parameter: any={};//存在本地的中君的请求参数 解密的
+	json: any={};//存在本地的中君的请求参数
 	checkorderdetails: any = {};//订单校验返回的收款地址 截止时间 appName
 	notifyOrderPay: string = '';//回调通知的接口名称
 	HASH:string='';//支付结果  返回给中君的
@@ -48,7 +49,7 @@ export class PayforzojunPage {
 		describe: "区块链上的新能源汽车子链",
 		erc20_address: "0x383811667cE9646E8bCE8aff8Ca049751dbeC64B",
 		erc20_symbol: "CKT",
-		icon: "http://trusting.halobtc.com/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
+		icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
 		id: 1,
 		is_token: 1,
 		main_account: "",
@@ -58,7 +59,7 @@ export class PayforzojunPage {
 		rpc: "",
 		sender: "0x19dcff83384184a779a7abb2a9b4645af3e6e646",
 		subchain_address: "0xac7c54e2b6bae6768bbc90afc51b022e9200a4dc",
-		token_icon: "http://trusting.halobtc.com/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
+		token_icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
 		txReward: 93927920435,
 		updatedAt: 1560138262967,
 		viaReward: 9392792006040992,
@@ -80,13 +81,13 @@ export class PayforzojunPage {
 		this.getSubChainBalance();
 		this.storage.get("parameter").then(res => {
 			console.log(res)
-			this.parameter = JSON.parse(res);
+			this.json = JSON.parse(res);
 		
 		}).then(()=>{
 			setTimeout(() => {
-				if (this.parameter) {
+				if (this.json) {
 					// 生成 A 的公私钥对象 zo
-					console.log('this.parameter 存在',this.parameter)
+					console.log('this.json 存在',this.json)
 					const zo_public_key = new NodeRSA(this.zo_public_key_data);
 					zo_public_key.setOptions({ encryptionScheme: 'pkcs1' });
 					zo_public_key.setOptions({
@@ -107,17 +108,26 @@ export class PayforzojunPage {
 	
 					// const encrypted = b_public_key.encrypt(text, 'base64');
 					// console.log('B 公钥加密:', encrypted);
-					console.log('this.parameter["secret"]', this.parameter["secret"]);
+					console.log('this.json["secret"]', this.json["secret"]);
 					// 解密并验签
-					const decrypted = wo_private_key.decrypt(this.parameter["secret"], 'utf8');
+					const decrypted = wo_private_key.decrypt(this.json["secret"], 'utf8');
 					console.log('我的 私钥解密:', decrypted);
 	
-					const verify = zo_public_key.verify(decrypted, this.parameter["sign"], 'utf8', 'base64');
+					const verify = zo_public_key.verify(decrypted, this.json["sign"], 'utf8', 'base64');
 					// const verify = a_public_key.verify(decrypted, "Hliaaq1moSvCeDGQteRX0nfSdiZ5WP3g9/OYYPiyi1qXymhxNwIWaOMqeeX3e7RT PsZB2a9ihITc1pGo6s4cI4XYavKUYa6r/ZKDNJ2S6WkObiC854afh8TRoJOcYBSiVoWU7iPwnEv LYS2gbwlKd1kIlMuT072Yq15LyG3vqQQ=", 'utf8', 'base64');
 					console.log('你的 公钥验签:', verify);
-					this.parameter = JSON.parse(decrypted);//先做解密 再赋值
-					this.amount = this.parameter.orderAmount;
-					this.checkOrder();
+					if(verify){this.parameter = JSON.parse(decrypted);//先做解密 再赋值
+						this.amount = this.parameter.orderAmount;
+						this.checkOrder();
+					}else{
+						let parameter={
+							code:-1,
+							message:"验签失败,请勿手动修改参数"
+						}
+						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						console.log('uri',uri)
+						this.turnApp(uri);
+					}
 				}
 			}, 1000);
 		});
@@ -244,6 +254,14 @@ export class PayforzojunPage {
 						this.checkorderdetails = JSON.parse(result);
 						console.log(this.checkorderdetails)
 						this.toAddr = this.checkorderdetails.tokenAddress;
+					}else{
+						let parameter={
+							code:-1,
+							message:"校验订单失败："+res1.message
+						}
+						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						console.log('uri',uri)
+						this.turnApp(uri);
 					}
 				}
 			);
@@ -301,6 +319,14 @@ export class PayforzojunPage {
 
 						// let hash = 'teststststststhash';
 						this.postNotifyOrderPay(this.HASH);
+					}else{
+						let parameter={
+							code:-1,
+							message:"校验支付失败："+res1.message
+						}
+						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						console.log('uri',uri)
+						this.turnApp(uri);
 					}
 				}
 			);
@@ -347,10 +373,36 @@ export class PayforzojunPage {
 					let res1 = JSON.parse(res);
 					if (res1.code == 0) {
 						console.log('result', '回调成功');
+					}else{
+						let parameter={
+							code:-1,
+							message:"支付结果异步回调失败："+res1.message
+						}
+						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						console.log('uri',uri)
+						this.turnApp(uri);
 					}
 				}
 			);
 
+	}
+	returnapp(){
+		let parameter:any={};
+		if(this.HASH!==''){
+			parameter={
+				code:0,
+				message:"交易请求已经提交给区块链网络，请等待正式生效。"
+			}
+		}else{
+			parameter={
+				code:-1,
+				message:"用户放弃支付"
+			}
+		}
+		
+		let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+		console.log('uri',uri)
+		this.turnApp(uri);
 	}
 	datetolong(lo) {
 		console.log('lo', lo)
@@ -385,50 +437,29 @@ export class PayforzojunPage {
 		}
 		return ret;
 	}
-	turnApp() {
-		var app = '';
-		// console.log('this.platform', this.platform)
-		if (this.platform.is('ios')) {
-			app = 'wallet.zojun://';      /* Scheme URL */
-		} else if (this.platform.is('android')) {
-			app = 'io.moac.mobao';     /* 安卓包名 */
-		}
+	turnApp(uri) {
+        // "package": "io.moac.mobao",
 		try {
-			this.appAvailability.check(app)     /* 检测是否已安装 */
-				.then(
-					(yes: boolean) => {
-						console.log(1)
-						// cordova.InAppBrowser.create(app, '_system');    /* 打开QQ */
-						/*若是想要打开其他APP,则使用this.iab.create('Scheme URL','_system')*/
-						let mobaoApp = startApp.set({
-							"action": "ACTION_VIEW",
-							"category": "CATEGORY_DEFAULT",
-							"type": "text/css",
-							"package": "io.moac.mobao",
-							"uri": "wallet.zojun://to=dsfsafd&currency=cnt",
-							"flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
-							"intentstart": "startActivity",
-						}, {
-								"EXTRA_STREAM": "extraValue1",
-								"extraKey2": "extraValue2"
-							});
-						mobaoApp.start(function () {
-							console.log("sApp.start succeed");
-						}, function (error) {
-							alert("error---" + error);
-						});
-					},
-					(no: boolean) => {
-						alert("没有安装相应的app");
-					}).catch(err => {
-						console.log('err', err)
-					});
+			let mobaoApp = startApp.set({
+                "action": "ACTION_VIEW",
+                "category": "CATEGORY_DEFAULT",
+                "type": "text/css",
+                "uri": uri,
+                "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
+                "intentstart": "startActivity",
+            }, {
+                    "EXTRA_STREAM": "extraValue1",
+                    "extraKey2": "extraValue2"
+                });
+            mobaoApp.start(function () {
+                console.log("sApp.start succeed");
+            }, function (error) {
+                alert("error---" + error);
+            });
 		} catch (error) {
 			console.log(error);
-			cordova.InAppBrowser.create(app, '_system');
 		}
-
-	}
+    }
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad PayforzojunPage');
 	}
