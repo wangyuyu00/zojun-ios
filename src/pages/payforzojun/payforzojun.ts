@@ -120,8 +120,7 @@ export class PayforzojunPage {
 						this.amount = this.parameter.orderAmount;
 						this.checkOrder();
 					}else{
-						let message="验签失败,请勿手动修改参数"
-						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://code=-1&message=verifyFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -253,7 +252,7 @@ export class PayforzojunPage {
 						this.toAddr = this.checkorderdetails.tokenAddress;
 					}else{
 						let message="校验订单失败："+res1.message;
-						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://code=-1&message=checkOrderFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -315,8 +314,7 @@ export class PayforzojunPage {
 						// let hash = 'teststststststhash';
 						this.postNotifyOrderPay(this.HASH);
 					}else{
-						let message="校验支付失败："+res1.message;
-						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://code=-1&message=checkOrderPayFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -367,8 +365,7 @@ export class PayforzojunPage {
 					if (res1.code == 0) {
 						console.log('result', '回调成功');
 					}else{
-						let message="支付结果异步回调失败："+res1.message;
-						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://code=-1&message=notifyOrderPayFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -379,9 +376,9 @@ export class PayforzojunPage {
 	returnapp(){
 		let uri:string='';
 		if(this.HASH!==''){
-			uri = this.json['schemes']+'://code=0&message=交易请求已经提交给区块链网络，请等待正式生效&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+			uri = this.json['schemes']+'://code=0&message=paySuccess&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		}else{
-			uri = this.json['schemes']+'://code=-1&message=用户放弃支付&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+			uri = this.json['schemes']+'://code=-1&message=abandon&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		}
 		console.log('uri',uri)
 		this.turnApp(uri);
