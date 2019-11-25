@@ -404,7 +404,7 @@ export class PayforzojunPage {
 		
 		let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		console.log('uri',uri)
-		this.turnApp(uri);
+		// this.turnApp(uri);
 	}
 	datetolong(lo) {
 		console.log('lo', lo)
