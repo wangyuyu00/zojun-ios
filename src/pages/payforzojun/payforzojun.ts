@@ -124,7 +124,7 @@ export class PayforzojunPage {
 							code:-1,
 							message:"验签失败,请勿手动修改参数"
 						}
-						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -259,7 +259,7 @@ export class PayforzojunPage {
 							code:-1,
 							message:"校验订单失败："+res1.message
 						}
-						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -325,7 +325,7 @@ export class PayforzojunPage {
 							code:-1,
 							message:"校验支付失败："+res1.message
 						}
-						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -380,7 +380,7 @@ export class PayforzojunPage {
 							code:-1,
 							message:"支付结果异步回调失败："+res1.message
 						}
-						let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -402,7 +402,7 @@ export class PayforzojunPage {
 			}
 		}
 		
-		let uri = this.json['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+		let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		console.log('uri',uri)
 		this.turnApp(uri);
 	}
