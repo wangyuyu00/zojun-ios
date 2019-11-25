@@ -297,6 +297,7 @@ export class PayforzojunPage {
 		let data = {
 			secret: encrypted,
 			sign: sign,
+			version: "1.0.0",
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http
@@ -363,6 +364,7 @@ export class PayforzojunPage {
 		let data = {
 			secret: encrypted,
 			sign: sign,
+			version: "1.0.0",
 			timestamp: this.datetolong(timestamp.valueOf()),
 		}
 		this.http

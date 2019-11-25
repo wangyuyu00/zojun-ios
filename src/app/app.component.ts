@@ -34,11 +34,9 @@ export class MyApp {
         private menuCtrl: MenuController,
         splashScreen: SplashScreen,
         private translate: TranslateService) {
-            console.log('app 打开时间戳',new Date().getTime());
             setTimeout(() => {
                 (window as any).handleOpenURL = (url: string) => {
                     console.log('所传参数URL为', url);
-                    console.log('收到参数时间戳',new Date().getTime())
                     let arr:any = url.slice(15).split('&');
                     let json:any={};
                     for (const key in arr) {
@@ -52,48 +50,45 @@ export class MyApp {
                     console.log('处理好的 参数',this.parameter)
                 };
             }, 0);
+            //this.parameter='{"sign":"BYo3HfVf91pyP3BN4xJKUCHoPQRZT2BRjNgcMoHf8F7Qll2pifCa9Gv1AwHbE4wvaMiZbkmTuDWQP69P0cMWB3f+h2WquMkzNXDAwS/vPwpo5rOJ+QO73UAwxtcf+hU35lCAlmwzfONpGoCtD1St2/v/MkwLyxNg79mmI8w7Mq0=","secret":"dYDboG+7xh4FfZ2CTiF9oNkfs2IlcDRbIZHb1857qpsYxQTSnvHO374RXYZ87L2V6Kg0fvyB3kY5sa87YMaJ45Fr+GjPgNwzvK6EKbjVTLtEVvklkxUPEpoMlVyV+mUZG4epNpLqrNq2xAsqcOLkRhYr/NJf3MGNY+CR5SuZ/iQpTYBLRK//j9M1t+ozv27EP5CRMhVWtoABDe1BXPC4JKqWwFdHDsB2b79dIl0gzTX5TN4+4P8MFc6O3TvT7AZzXnT7h3opWWZID3LLjluig7pTuinvwe3lF2935d9MFDr85yjA8WK0mQZpv9pu4ZYpIzWvIgAwDD5MQ5kdzXr3WH9I8Mp/Uz5jwexshKrCFCJuHbiwAbazR1VZ/aIToeO7xtUnqcZdfYSwpnHdnr6ysJZyq/piBM65cnTZJZt4hT1/pSkGtVHuzG7Qluf6g9A5ItfXfPg01QjMJx/u9fmmGUt6lnZ1dSiUmP1YQVBrWObpLviWkGysH3mx7yxFEcRwc7DWdgwPXIQ7f+ZbQF1GE4WAdm0NEInRO7/MZtHj91QPyFwI1vxXeas4pmhHgg83yUtFeDfNhJ6AC5AXHxKLcPl7oGYs57cwNCM+ilWzof9kM2vZ4UlCDOY2O+0Am2WoTufR6W9l7hqsioZbsfqVPnQx2HfUG4FDwA0DvJ3n2K8=","version":"1.0","timestamp":"1574653219421","schemes":"mall.zhongjun","payType":"30","payMoney":"0.01","paySource":"TopupVC"}';
             this.storage.get('user').then((user) => {//获取当前用户
                 //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
                 this.user= user;
             }).then(()=>{
-                setTimeout(() => {
-                    console.log('判断入口时间戳',new Date().getTime())
-                    console.log('判断入口时候的参数',this.parameter)
-                    if (this.user) {
-                        if (this.parameter == '') {
-                            this.rootPage = TabsPage;
-                        } else {
-                            this.storage.set('parameter', this.parameter);
-                            this.rootPage = 'PayforzojunPage';
-                        }
-                    }else {
-                        if (this.parameter == '') {
-                            this.rootPage = 'LoginPage';
-                        } else {
-                            let prompt = this.alertCtrl.create({
-                                title: '提示',
-                                message: "请先创建钱包再尝试支付操作",
-                                buttons: [
-                                    {
-                                        text: '返回商家',
-                                        handler: data => {
-                                            //这里做返回商家处理
-                                            let parameter={
-                                                code:-1,
-                                                message:"钱包内无账户,请先创建账户再使用"
-                                            }
-                                            let uri = this.parameterobj['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.parameterobj['paySource']+'&payMoney='+this.parameterobj['payMoney']+'&payType='+this.parameterobj['payType']+'&schemes='+this.parameterobj['schemes'];
-                                            console.log('uri',uri)
-                                            this.turnApp(uri);
-                                        }
-                                    }
-                                ]
-                            });
-                            prompt.present();
-                            // this.rootPage = 'LoginPage';
-                        }
+                if (this.user) {
+                    if (this.parameter == '') {
+                        this.rootPage = TabsPage;
+                    } else {
+                        this.storage.set('parameter', this.parameter);
+                        this.rootPage = 'PayforzojunPage';
                     }
-                }, 1000);
+                }else {
+                    if (this.parameter == '') {
+                        this.rootPage = 'LoginPage';
+                    } else {
+                        let prompt = this.alertCtrl.create({
+                            title: '提示',
+                            message: "请先创建钱包再尝试支付操作",
+                            buttons: [
+                                {
+                                    text: '返回商家',
+                                    handler: data => {
+                                        //这里做返回商家处理
+                                        let parameter={
+                                            code:-1,
+                                            message:"钱包内无账户,请先创建账户再使用"
+                                        }
+                                        let uri = this.parameterobj['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.parameterobj['paySource']+'&payMoney='+this.parameterobj['payMoney']+'&payType='+this.parameterobj['payType']+'&schemes='+this.parameterobj['schemes'];
+                                        console.log('uri',uri)
+                                        this.turnApp(uri);
+                                    }
+                                }
+                            ]
+                        });
+                        prompt.present();
+                        // this.rootPage = 'LoginPage';
+                    }
+                }
             });
 
         platform.ready().then(() => {
@@ -115,9 +110,9 @@ export class MyApp {
                 "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
                 "intentstart": "startActivity",
             }, {
-                    "EXTRA_STREAM": "extraValue1",
-                    "extraKey2": "extraValue2"
-                });
+                "EXTRA_STREAM": "extraValue1",
+                "extraKey2": "extraValue2"
+            });
             mobaoApp.start(function () {
                 console.log("sApp.start succeed");
             }, function (error) {
