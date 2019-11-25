@@ -404,7 +404,7 @@ export class PayforzojunPage {
 		
 		let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		console.log('uri',uri)
-		// this.turnApp(uri);
+		this.turnApp(uri);
 	}
 	datetolong(lo) {
 		console.log('lo', lo)
@@ -442,22 +442,28 @@ export class PayforzojunPage {
 	turnApp(uri) {
         // "package": "io.moac.mobao",
 		try {
-			let mobaoApp = startApp.set({
-                "action": "ACTION_VIEW",
-                "category": "CATEGORY_DEFAULT",
-                "type": "text/css",
-                "uri": uri,
-                "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
-                "intentstart": "startActivity",
-            }, {
-                    "EXTRA_STREAM": "extraValue1",
-                    "extraKey2": "extraValue2"
-                });
+			let mobaoApp = startApp.set("mall.zhongjun://");
             mobaoApp.start(function () {
                 console.log("sApp.start succeed");
             }, function (error) {
                 alert("error---" + error);
             });
+			// let mobaoApp = startApp.set({
+            //     "action": "ACTION_VIEW",
+            //     "category": "CATEGORY_DEFAULT",
+            //     "type": "text/css",
+            //     "uri": uri,
+            //     "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
+            //     "intentstart": "startActivity",
+            // }, {
+            //         "EXTRA_STREAM": "extraValue1",
+            //         "extraKey2": "extraValue2"
+            //     });
+            // mobaoApp.start(function () {
+            //     console.log("sApp.start succeed");
+            // }, function (error) {
+            //     alert("error---" + error);
+            // });
 		} catch (error) {
 			console.log(error);
 		}
