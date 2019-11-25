@@ -120,11 +120,8 @@ export class PayforzojunPage {
 						this.amount = this.parameter.orderAmount;
 						this.checkOrder();
 					}else{
-						let parameter={
-							code:-1,
-							message:"验签失败,请勿手动修改参数"
-						}
-						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let message="验签失败,请勿手动修改参数"
+						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -255,11 +252,8 @@ export class PayforzojunPage {
 						console.log(this.checkorderdetails)
 						this.toAddr = this.checkorderdetails.tokenAddress;
 					}else{
-						let parameter={
-							code:-1,
-							message:"校验订单失败："+res1.message
-						}
-						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let message="校验订单失败："+res1.message;
+						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -321,11 +315,8 @@ export class PayforzojunPage {
 						// let hash = 'teststststststhash';
 						this.postNotifyOrderPay(this.HASH);
 					}else{
-						let parameter={
-							code:-1,
-							message:"校验支付失败："+res1.message
-						}
-						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let message="校验支付失败："+res1.message;
+						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -376,11 +367,8 @@ export class PayforzojunPage {
 					if (res1.code == 0) {
 						console.log('result', '回调成功');
 					}else{
-						let parameter={
-							code:-1,
-							message:"支付结果异步回调失败："+res1.message
-						}
-						let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
+						let message="支付结果异步回调失败："+res1.message;
+						let uri = this.json['schemes']+'://code=-1&message='+message+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 						console.log('uri',uri)
 						this.turnApp(uri);
 					}
@@ -389,20 +377,12 @@ export class PayforzojunPage {
 
 	}
 	returnapp(){
-		let parameter:any={};
+		let uri:string='';
 		if(this.HASH!==''){
-			parameter={
-				code:0,
-				message:"交易请求已经提交给区块链网络，请等待正式生效。"
-			}
+			uri = this.json['schemes']+'://code=0&message=交易请求已经提交给区块链网络，请等待正式生效&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		}else{
-			parameter={
-				code:-1,
-				message:"用户放弃支付"
-			}
+			uri = this.json['schemes']+'://code=-1&message=用户放弃支付&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		}
-		
-		let uri = this.json['schemes']+'://parameter='+JSON.stringify(parameter)+'&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		console.log('uri',uri)
 		this.turnApp(uri);
 	}
@@ -440,30 +420,13 @@ export class PayforzojunPage {
 		return ret;
 	}
 	turnApp(uri) {
-        // "package": "io.moac.mobao",
 		try {
-			let mobaoApp = startApp.set("mall.zhongjun://");
+			let mobaoApp = startApp.set(uri);
             mobaoApp.start(function () {
                 console.log("sApp.start succeed");
             }, function (error) {
                 alert("error---" + error);
             });
-			// let mobaoApp = startApp.set({
-            //     "action": "ACTION_VIEW",
-            //     "category": "CATEGORY_DEFAULT",
-            //     "type": "text/css",
-            //     "uri": uri,
-            //     "flags": ["FLAG_ACTIVITY_CLEAR_TOP", "FLAG_ACTIVITY_CLEAR_TASK"],
-            //     "intentstart": "startActivity",
-            // }, {
-            //         "EXTRA_STREAM": "extraValue1",
-            //         "extraKey2": "extraValue2"
-            //     });
-            // mobaoApp.start(function () {
-            //     console.log("sApp.start succeed");
-            // }, function (error) {
-            //     alert("error---" + error);
-            // });
 		} catch (error) {
 			console.log(error);
 		}
