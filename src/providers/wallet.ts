@@ -49,26 +49,11 @@ export class WalletProvider {
 	) {
 		this.filters = {};
 		this.getTokens();
-		// this.storage.get('network').then(net => {
-		// 	try {
-		// 		this.chain3 = new Chain3(new Chain3.providers.HttpProvider(net));
-		// 		this.chain3.mc.getBalance('0x0be706d513fd4e42e6ba9a3cc6da3cf898df116b');
-		// 	} catch (e) {
-		// alert(e.message);
 		this.chain3 = new Chain3(new Chain3.providers.HttpProvider(rpcUrl));
-		// }
-		// alert('use network ' + this.chain3.currentProvider.host)
-		// });	
+		
 	}
 	ionViewWillEnter() {
 		this.getTokens();
-		// this.storage.get('network').then((net)=>{
-		// 	if(net){
-		// 		rpcUrl = net;
-		// 		chain3 = new Chain3(new Chain3.providers.HttpProvider(rpcUrl));
-		// 		networkid = chain3.version.network;
-		// 	}
-		// })
 	}
 	getInstance() {
 		this.chain3;
@@ -78,7 +63,7 @@ export class WalletProvider {
 	}
 	getTokens() {
 		this.http
-			.get("https://mobao.coinpany.cn/api/tokens", {})
+			.get("http://39.98.170.101:3779/api/tokens", {})
 			.subscribe(
 				data => {
 					let res = JSON.stringify(data);
@@ -109,23 +94,17 @@ export class WalletProvider {
 
 	// 查询token的配置信息
 	async getTokenInfo(assetCode) {
-		// var tokens:any;
-		// tokens = this.getTokens();
-		//var tokens = this.tokens;
 		if (this.tokens.ERC20[assetCode]) return this.tokens.ERC20[assetCode];
-		let storage_tokens = await this.storage.get('tokens');
-		if (storage_tokens.ERC20[assetCode]) return storage_tokens.ERC20[assetCode];
+		// let storage_tokens = await this.storage.get('tokens');
+		// if (storage_tokens.ERC20[assetCode]) return storage_tokens.ERC20[assetCode];
 		return null;
 	}
 
 	// 查询collection的配置信息
 	async getCollectionInfo(assetCode) {
-		// var tokens:any;
-		// tokens = this.getTokens();
-		//var tokens = this.tokens;
 		if (this.tokens.ERC721[assetCode]) return this.tokens.ERC721[assetCode];
-		let storage_tokens = await this.storage.get('tokens');
-		if (storage_tokens.ERC721[assetCode]) return storage_tokens.ERC721[assetCode];
+		// let storage_tokens = await this.storage.get('tokens');
+		// if (storage_tokens.ERC721[assetCode]) return storage_tokens.ERC721[assetCode];
 		return null;
 	}
 
@@ -352,9 +331,6 @@ export class WalletProvider {
 	// 如果是ERC721转账，需要设置assetCode, gasPrice, gasLimit, erc721(true), 
 	// 以及tokenId
 	async sendTransaction(fromSecret, to, amount, option) {
-		// var tokens:any;
-		// tokens = this.getTokens();
-		//var tokens = this.tokens;
 		let secretObj = `0x${fromSecret}`;
 		const account = MoacUtils.privateToAddress(Buffer.from(fromSecret, 'hex')).toString('hex');
 		const from = '0x' + account.toString('hex');
@@ -591,7 +567,6 @@ export class WalletProvider {
 		return this.jsonResult(result);
 	}
 	async mc_accounts(params) {
-		// read from storage not this.chain3 personal
 		var result = await this.storage.get('pockets');
 		return this.jsonResult(result);
 	}
@@ -1009,7 +984,7 @@ export class WalletProvider {
 	 */
 	async SubChainSend(fromSecret, toAddr, amount, subchainAddr, rpc) {
 		this.chain3 = new Chain3(
-			new Chain3.providers.HttpProvider("http://39.98.62.240:8545")
+			new Chain3.providers.HttpProvider("http://node.moacchina.info")
 		);
 
 
@@ -1090,7 +1065,7 @@ export class WalletProvider {
 	 */
 	async SubChainWith(fromSecret, amount, baseAddress, subchainAddr, rpc) {
 		this.chain3 = new Chain3(
-			new Chain3.providers.HttpProvider("http://39.98.62.240:8545")
+			new Chain3.providers.HttpProvider("http://node.moacchina.info")
 		);
 		let request = require("request");
 		let that = this;

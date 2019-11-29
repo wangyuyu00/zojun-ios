@@ -24,7 +24,7 @@ export class TokensendPage extends BaseUI {
   token: any = {};//路由传过来的token
   amount: string = '';//要转出金额
   address: string = '';//接收方地址
-  saturation: number = 10000;
+  saturation: number = 20000;
   gas: number = 0;//
   moac: number = 0;
   sendResult1: any;

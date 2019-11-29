@@ -6,6 +6,7 @@ import { MenuController } from 'ionic-angular';
 import { BaseUI } from "../common/baseui";
 import { TranslateService } from '@ngx-translate/core';
 import { takeUntil } from 'rxjs/operator/takeUntil';
+import { HttpClient } from "@angular/common/http";
 import VConsole from 'vconsole';
 // var vConsole = new VConsole();
 
@@ -27,111 +28,55 @@ export class AssetPage extends BaseUI {
     pockets: any = [];
     user: any = {};
     ERC20: any = [];
-    ERC721: any = [];
     tokens: any = [];//通证余额
     value: any = '';//子链余额
     publicPem: any = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZMESj2X2x9X4TvW3s0e+TYqsz69P0hNqnJuJX/hsnZjlO/A41cUyzw/4oVBkFNThC7X06NiiciHvHB+f8VowynReNFeGxB13ULLGb2mRVerk/enPJ1iJWLMKrvPOq0nuErhnovdyEmhqrITDPmNb/TADQHACCVi/l7h635SSpIwIDAQAB';
     privte: any = 'MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJkwRKPZfbH1fhO9bezR75NiqzPr0/SE2qcm4lf+GydmOU78DjVxTLPD/ihUGQU1OELtfTo2KJyIe8cH5/xWjDKdF40V4bEHXdQssZvaZFV6uT96c8nWIlYswqu886rSe4SuGei93ISaGqshMM+Y1v9MANAcAIJWL+XuHrflJKkjAgMBAAECgYEAkajf25y2dDymAUch+wkz8MTlXZ1kESEyd7X1iw3H7BK7c2sgZ5iwAk7eoKI2mEkekiUX6f4NZ6ovZ/UQlVQGQa7MP2byrEMssE8swmjXL5XOsIRCDYt1JV+B8568vGa2W5n+nGy7ljE0X8cw8m6CcaqM+po2mqQmwEnm6zP8YSECQQDfv6l45b7CcfpkAruFwtthVF71zQtoFkWU/apATXqcGSa2sn70YwsBpzuB8sRzhLkISGrXa423A+QDGEUAr+4lAkEAr0Tu/NvKnD0xb02S3J5aYXDQViuGyJyAgtZlFKnjn5bkUOsgDsDclLXRnC7WQJALBY/q+0FxVQor4jh/TahjpwJAZbc6ssQ2uSyZeJepagCQPKnfVXy2X8YoMbgzinHueEIS0GFKx4yy9zhwG/4iAqXme/Z346B4VyfEoweIbuyLpQJAIseuGRVQfnKSNcESDJ+L1dw6K29Vvsd3pP8AbfpMhiW+RuRxpxvUadouryyILaWn2kG14ogZAkQTcz+821837wJBAKON+bp5atHRzJdQn5od3WUrrz52OKiz4wwEB6eH1XLe3K82Om3eNMLaGbv/Ll2O5UmRzvAz8DXotMtTL5Hsz0E='
     subChainInfo: any = {
-        MicroChain: "0xac7c54e2b6bae6768bbc90afc51b022e9200a4dc",
-        ScsCount: 8,
-        balance: 5000000000000,
-        blockReward: 469639600302410,
-        dapp_base_address: "0x7eb9624edd7171e154cda4516742be3987a5d459",
-        erc20_address: "0x383811667cE9646E8bCE8aff8Ca049751dbeC64B",
-        erc20_symbol: "CKT",
-        subchain_address: "0xac7c54e2b6bae6768bbc90afc51b022e9200a4dc",
-        icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
+        MicroChain: "0x1a57f5ee58a0de2c7065bc2c6b6f33a22b591b2b",
+        ScsCount: 9,
+        balance: 10000000000000000000000000000,
+        blockReward: 495420912933712,
+        sender: "0x6f0d5b8df93b93d56596718e6f3172722b0c9332",
+        txReward: 99084182643,
+        viaReward: 9908418258673136,
+        dapp_base_address: "0x2180fc09aab3cd89a5b71ce175ef79eb72d75c79",
+        describe: "中君子链",
+        erc20_address: "0x35c8a6273d8206e7cb1a873afcd1b4ae2a8d9e98",
+        erc20_symbol: "TCNY",
+        icon: "http://pics.coinpany.cn/70e3a14f-13e1-4270-bef6-9afa725e4bf3.png",
+        id: 2,
         is_token: 1,
-        monitor_ip: "47.110.129.12:50068",
-        name: "卡巴子链",
+        main_account: "",
+        monitor_ip: "47.56.191.157:50068",
+        name: "中君子链",
         proportion: "1:1",
         rpc: "",
-        sender: "0x19dcff83384184a779a7abb2a9b4645af3e6e646",
-        txReward: 93927920435,
-        viaReward: 9392792006040992,
+        subchain_address: "0x1a57f5ee58a0de2c7065bc2c6b6f33a22b591b2b",
+        token_icon: "",
+        updatedAt: 1574923077979,
         vnode_ip: "",
         vnode_protocol_address: "",
-        describe: "区块链上的新能源汽车子链",
-        id: 1,
-        main_account: "",
-        token_icon: "http://pics.coinpany.cn/90b6fd38-3499-4af2-9c87-039bec9727b9.png",
-        updatedAt: 1560138262967,
     };
     Tokens: any; //storage里面的token
-    Token721: any; //storage里面的token721
     Token20: any; //storage里面的token20
-    collections: any = [];//收藏品余额
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private storage: Storage,
         private zone: NgZone,
+		private http: HttpClient,
         public menuCtrl: MenuController,
         public walletProvider: WalletProvider,
         public translate: TranslateService,
         public alertCtrl: AlertController) {
         super();
-
-        setTimeout(() => {
-            this.getPockets();//获取所有钱包
-            this.getSubChainBalance();
-        }, 1000);
-        // const key = new NodeRSA({ b: 1024 });
-        // const pkcsType = 'pkcs1';
-        // key.setOptions({ encryptionScheme: pkcsType });
-        // const publicPem = key.exportKey(pkcsType + '-public-pem');//制定输出格式
-        // const privatePem = key.exportKey(pkcsType + '-private-pem');
-        // console.log(pkcsType + '公钥:\n', publicPem);
-        // console.log(pkcsType + '私钥:\n', privatePem);
+       
     }
-
-    ionViewDidLoad() {
-        //   // console.log('ionViewDidLoad AssetPage');
-        //     this.getPockets();//获取所有钱包
-    }
+    
     ionViewWillEnter() {
-        if (this.tokens.length > 0 || this.collections.length > 0) {
-            this.onlyGetPockets();//时时更新钱包
-            this.getPockets();//获取所有钱包
-            this.onlyGetTokens();//时时更新资产
-        }
-    }
-    onlyGetPockets() {
-        this.storage.get('pockets').then((p) => {
-            if (p) {
-                if (p.length != this.pockets.length) {
-                    this.pockets = p;
-                }
-                // this.user = p[0];
-                // this.storage.set('user',this.user);
-            }
-        })
-    }
-    async onlyGetTokens() {
-        let that = this;
-        if (await this.storage.get('tokens')) {
-            that.Tokens = await that.storage.get('tokens');
-            that.Token721 = that.Tokens.ERC721;
-            that.Token20 = that.Tokens.ERC20;
-            that.ERC721 = [];
-            that.ERC20 = [];
-            for (let key in that.Tokens.ERC721) {
-                if (that.Tokens.ERC721[key].flag == true) {
-                    that.ERC721.push(that.Tokens.ERC721[key].symbol);
-                }
-            }
-            for (let key in that.Tokens.ERC20) {
-                if (that.Tokens.ERC20[key].flag == true) {
-                    that.ERC20.push(that.Tokens.ERC20[key].symbol);
-                }
-            }
-        } else {
-            that.ERC721 = ['NFT'];
-            that.ERC20 = [];
-        }
-        that.getMoacAndTokenBalances();
-        that.getCollectionBalances();
+        this.getPockets();//获取所有钱包
+        this.getSubChainBalance();
     }
     async getPockets() {
         let that = this;
@@ -139,34 +84,15 @@ export class AssetPage extends BaseUI {
             that.pockets = await that.storage.get('pockets');
             that.user = that.pockets[0];
             that.storage.set('user', that.user);
-            // this.getCollectionBalances();//页面出来 点击再条用
         }
-        if (await that.storage.get('tokens')) {
-            that.Tokens = await that.storage.get('tokens');
-            that.Token721 = that.Tokens.ERC721;
-            that.Token20 = that.Tokens.ERC20;
-            that.ERC721 = [];
-            that.ERC20 = [];
-            for (let key in that.Tokens.ERC721) {
-                if (that.Tokens.ERC721[key].flag == true) {
-                    that.ERC721.push(that.Tokens.ERC721[key].symbol);
-                }
-            }
-            for (let key in that.Tokens.ERC20) {
-                if (that.Tokens.ERC20[key].flag == true) {
-                    that.ERC20.push(that.Tokens.ERC20[key].symbol);
-                }
-            }
-        } else {
-            that.ERC721 = ['NFT'];
-            that.ERC20 = [];
-        }
-        that.getMoacAndTokenBalances();
+        this.getTokens();
+        
     }
     async getMoacAndTokenBalances() {//获得MOAC和ERC20代币的余额  --moac放在第一个
         let that = this;
         let balances: any;
         try {
+            console.log('that.ERC20',that.ERC20)
             balances = await that.walletProvider.getMoacAndTokenBalances(that.user.address, that.ERC20) || [];
             for (let key in balances) {
                 for (let item in that.Token20) {
@@ -184,56 +110,22 @@ export class AssetPage extends BaseUI {
         // this.tokens = await this.walletProvider.getMoacAndTokenBalances(this.user.address,this.ERC20) || [];
 
     }
-    async getCollectionBalances() {//获得ERC721收藏品的余额
-        let that = this;
-        let balances: any;
-        try {
-            balances = await that.walletProvider.getCollectionBalances(that.user.address, that.ERC721) || [];
-            for (let key in balances) {
-                for (let item in that.Token721) {
-                    if (balances[key].code == that.Token721[item].symbol) {
-                        balances[key].icon = that.Token721[item].icon;
-                    }
-                }
-            }
-            that.zone.run(() => {
-                that.collections = balances;
-            });
-        } catch (e) {
-            that.collections = [];
-        }
-        // this.collections = await this.walletProvider.getCollectionBalances(this.user.address,this.ERC721) || [];
-
-    }
+   
     slideChanged() {//切换钱包
         let currentIndex: number = this.slides.getActiveIndex();
         if (currentIndex == this.pockets.length) {
             currentIndex = this.pockets.length - 1;
         }
         this.user = this.pockets[currentIndex];
-        this.storage.set('user', this.user);
-        this.tabs = 'pass';
-        this.getMoacAndTokenBalances();
-        this.getSubChainBalance();
+        this.storage.set('user', this.user).then(()=>{
+            this.getMoacAndTokenBalances();
+            this.getSubChainBalance();
+        });
     }
     toTokenDetails(item) {//去通证详情
-        // if(item.value == 0){
-        //     this.errorMsg('暂无余额');
-        // }else{
         this.navCtrl.push('TokendetailsPage', {
             'item': item
         });
-        // }
-    }
-    toCollectionDetails(item) {//去收藏品详情
-        // if(item.value == 0){
-        //     this.errorMsg('暂无余额');
-        // }else{
-        this.navCtrl.push('CollectionlistPage', {
-            'item': item,
-            'user': this.user
-        });
-        // }
     }
     jump(item) {
         if (item != '') {
@@ -260,26 +152,41 @@ export class AssetPage extends BaseUI {
         });
         prompt.present();
     }
+
     doRefresh(refresher) {
-        // refresher.complete();
         setTimeout(() => {
-            this.onlyGetTokens();//刷新通证资产
+            this.storage.get('user').then((user)=>{
+                this.user = user;
+                this.getMoacAndTokenBalances();
+                this.getSubChainBalance();
+            })
             refresher.complete();
         }, 1000);
 
     }
-    doRefresh1(refresher) {
-        // refresher.complete();
-        setTimeout(() => {
-            this.onlyGetTokens();//刷新收藏品资产
-            refresher.complete();
-        }, 1000);
-
+    getTokens() {
+		this.http
+			.get("http://39.98.170.101:3779/api/tokens", {})
+			.subscribe(
+				data => {
+					let res = JSON.stringify(data);
+					let res1 = JSON.parse(res);
+                    this.Tokens = res1;
+                    // that.Tokens = await that.storage.get('tokens');
+                    this.Token20 = this.Tokens.ERC20;
+                    this.ERC20 = [];
+                    
+                    for (let key in this.Tokens.ERC20) {
+                        this.ERC20.push(this.Tokens.ERC20[key].symbol);
+                    }
+                    this.getMoacAndTokenBalances();
+					return res1;
+				}
+			);
     }
+
     ionViewDidEnter() {
         //进入显示TabBars
-
-        // this.getPockets();//获取所有钱包
         let elements = document.querySelectorAll(".tabbar");
         if (elements != null) {
             Object.keys(elements).map((key) => {

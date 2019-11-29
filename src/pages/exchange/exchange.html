@@ -1,0 +1,87 @@
+<!--
+  Generated template for the ExchangePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar>
+      <ion-title>通证兑换</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  
+  <ion-content padding>	
+    <div class="select-wrap">
+      <div class="select-one">
+        <ion-item>
+          <ion-select placeholder="请选择">
+            <ion-select-option value="1">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="icon-img">
+        <img src="../../assets/imgs/change.png" alt="">
+      </div>
+      <div class="select-two">
+        <ion-item>
+          <ion-select placeholder="请选择">
+            <ion-select-option value="2">Female</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+    <div class="scale">
+      转换比例 1 : 10.1
+    </div>
+    <div class="data-source">
+      <div>数据来源：{{source}}</div>
+      <div>当前币价：{{proportion}}</div>
+    </div>
+    <div class="card">
+      <div class="title">转出</div>
+      <div class="balance">
+        <p>转出钱包：权益TOKEN</p>
+        <p>余额 <span>250.1231.0</span></p>
+      </div>
+      <div class="input-wrap">
+        <input class="opa-input" type="text">
+        <ion-item>
+          <ion-select placeholder="选择或录入转出地址">
+            <ion-select-option value="f">Female</ion-select-option>
+            <ion-select-option value="m">Male</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="input-amount">
+        <input type="text" placeholder="点击输入转出数量">
+      </div>
+    </div>
+    <div class="card">
+      <div class="title">转入</div>
+      <div class="balance">
+        <p>转入钱包：权益TOKEN</p>
+        <p>余额 <span>{{value2}}</span></p>
+      </div>
+      <div class="input-wrap">
+        <input class="opa-input" type="text">
+        <ion-item>
+          <ion-select placeholder="选择或录入转入地址">
+            <ion-select-option value="f">Female</ion-select-option>
+            <ion-select-option value="m">Male</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+      <div class="input-amount">
+        <input type="text" placeholder="点击输入转入数量">
+      </div>
+    </div>
+    <div class="msg">
+      注：转账需要扣除MOAC币，需要当前钱包保留一定数量MOAC币。
+    </div>
+    <div class="btn-wrap">
+        <button (click)="pay()">开始兑换</button>
+        <button (click)="reset()">清空内容</button>
+    </div>
+  </ion-content>
+  

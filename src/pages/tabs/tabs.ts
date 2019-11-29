@@ -10,6 +10,7 @@ import VConsole from 'vconsole';
 export class TabsPage {
 
   tab1Root = 'AssetPage';
+  tab2Root = 'ExchangePage';
   tab4Root = 'MePage';
   address: string = '';
   system: string = '';
