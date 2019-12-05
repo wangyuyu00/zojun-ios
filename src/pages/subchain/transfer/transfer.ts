@@ -135,12 +135,14 @@ export class TransferPage extends BaseUI {
   async Send() {
     let secret = AppConfig.secretDec('moac', this.user.pwd, this.user.secret);
     if (Md5.hashStr(this.pwd) == this.user.pwd) {
+			let mome:string = this.parameter.orderNo+'&'+this.amount+this.user.address+'&'+this.toAddr;
       let res = await this.walletProvider.SubChainSend(
         secret,
         this.toAddr,
         this.amount,
         this.info.MicroChain,
-        "http://" + this.info.monitor_ip + "/rpc"
+        "http://" + this.info.monitor_ip + "/rpc",
+        mome
       );
       console.log(res);
       if (res) {

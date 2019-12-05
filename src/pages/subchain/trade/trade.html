@@ -16,7 +16,7 @@
         <div class="top_logo">
             <span>{{subChainInfo.erc20_symbol?(subChainInfo.erc20_symbol | slice:0:1):'C'}}</span>
         </div>
-        <p>{{balance - frozen}}</p>
+        <p>{{balance}}</p>
     </div>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>

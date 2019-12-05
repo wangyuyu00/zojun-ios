@@ -30,8 +30,6 @@ export class AssetPage extends BaseUI {
     ERC20: any = [];
     tokens: any = [];//通证余额
     value: any = '';//子链余额
-    publicPem: any = 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZMESj2X2x9X4TvW3s0e+TYqsz69P0hNqnJuJX/hsnZjlO/A41cUyzw/4oVBkFNThC7X06NiiciHvHB+f8VowynReNFeGxB13ULLGb2mRVerk/enPJ1iJWLMKrvPOq0nuErhnovdyEmhqrITDPmNb/TADQHACCVi/l7h635SSpIwIDAQAB';
-    privte: any = 'MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJkwRKPZfbH1fhO9bezR75NiqzPr0/SE2qcm4lf+GydmOU78DjVxTLPD/ihUGQU1OELtfTo2KJyIe8cH5/xWjDKdF40V4bEHXdQssZvaZFV6uT96c8nWIlYswqu886rSe4SuGei93ISaGqshMM+Y1v9MANAcAIJWL+XuHrflJKkjAgMBAAECgYEAkajf25y2dDymAUch+wkz8MTlXZ1kESEyd7X1iw3H7BK7c2sgZ5iwAk7eoKI2mEkekiUX6f4NZ6ovZ/UQlVQGQa7MP2byrEMssE8swmjXL5XOsIRCDYt1JV+B8568vGa2W5n+nGy7ljE0X8cw8m6CcaqM+po2mqQmwEnm6zP8YSECQQDfv6l45b7CcfpkAruFwtthVF71zQtoFkWU/apATXqcGSa2sn70YwsBpzuB8sRzhLkISGrXa423A+QDGEUAr+4lAkEAr0Tu/NvKnD0xb02S3J5aYXDQViuGyJyAgtZlFKnjn5bkUOsgDsDclLXRnC7WQJALBY/q+0FxVQor4jh/TahjpwJAZbc6ssQ2uSyZeJepagCQPKnfVXy2X8YoMbgzinHueEIS0GFKx4yy9zhwG/4iAqXme/Z346B4VyfEoweIbuyLpQJAIseuGRVQfnKSNcESDJ+L1dw6K29Vvsd3pP8AbfpMhiW+RuRxpxvUadouryyILaWn2kG14ogZAkQTcz+821837wJBAKON+bp5atHRzJdQn5od3WUrrz52OKiz4wwEB6eH1XLe3K82Om3eNMLaGbv/Ll2O5UmRzvAz8DXotMtTL5Hsz0E='
     subChainInfo: any = {
         MicroChain: "0x1a57f5ee58a0de2c7065bc2c6b6f33a22b591b2b",
         ScsCount: 9,
@@ -71,9 +69,10 @@ export class AssetPage extends BaseUI {
         public translate: TranslateService,
         public alertCtrl: AlertController) {
         super();
-       
+        
     }
     
+
     ionViewWillEnter() {
         this.getPockets();//获取所有钱包
         this.getSubChainBalance();
@@ -88,12 +87,14 @@ export class AssetPage extends BaseUI {
         this.getTokens();
         
     }
+
     async getMoacAndTokenBalances() {//获得MOAC和ERC20代币的余额  --moac放在第一个
         let that = this;
         let balances: any;
         try {
             console.log('that.ERC20',that.ERC20)
             balances = await that.walletProvider.getMoacAndTokenBalances(that.user.address, that.ERC20) || [];
+            console.log('balances',balances)
             for (let key in balances) {
                 for (let item in that.Token20) {
                     if (balances[key].code == that.Token20[item].symbol) {
@@ -104,13 +105,14 @@ export class AssetPage extends BaseUI {
             that.zone.run(() => {
                 that.tokens = balances;
             });
-        } catch (e) {
+        } catch (e) { 
+            console.log('e',e)
             that.tokens = [];
         }
         // this.tokens = await this.walletProvider.getMoacAndTokenBalances(this.user.address,this.ERC20) || [];
 
     }
-   
+    
     slideChanged() {//切换钱包
         let currentIndex: number = this.slides.getActiveIndex();
         if (currentIndex == this.pockets.length) {
@@ -152,7 +154,6 @@ export class AssetPage extends BaseUI {
         });
         prompt.present();
     }
-
     doRefresh(refresher) {
         setTimeout(() => {
             this.storage.get('user').then((user)=>{
@@ -184,9 +185,10 @@ export class AssetPage extends BaseUI {
 				}
 			);
     }
-
     ionViewDidEnter() {
         //进入显示TabBars
+
+        // this.getPockets();//获取所有钱包
         let elements = document.querySelectorAll(".tabbar");
         if (elements != null) {
             Object.keys(elements).map((key) => {

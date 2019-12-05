@@ -168,12 +168,15 @@ export class PayforzojunPage {
 				alert('参数解析错误 请稍后再试');
 				return
 			}
+			let mome:string = this.parameter.orderNo+'&'+this.amount+this.user.address+'&'+this.toAddr;
+			console.log('mome',mome)
 			let res:any = await this.walletProvider.SubChainSend(
 				secret,
 				this.toAddr,
 				this.amount,
 				this.info.MicroChain,
-				"http://" + this.info.monitor_ip + "/rpc"
+				"http://" + this.info.monitor_ip + "/rpc",
+				mome
 			);
 			// let res = true;
 			this.HASH = res;

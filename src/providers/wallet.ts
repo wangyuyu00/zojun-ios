@@ -982,7 +982,7 @@ export class WalletProvider {
 	 * @param subchainAddr 子链地址
 	 * @param rpc rpc接口地址
 	 */
-	async SubChainSend(fromSecret, toAddr, amount, subchainAddr, rpc) {
+	async SubChainSend(fromSecret, toAddr, amount, subchainAddr, rpc,mome?:string) {
 		this.chain3 = new Chain3(
 			new Chain3.providers.HttpProvider("http://node.moacchina.info")
 		);
@@ -1033,7 +1033,7 @@ export class WalletProvider {
 						to: subchainAddr,
 						value: that.chain3.intToHex(amountValue),
 						shardingFlag: "0x2",
-						data: toAddr, //转入账号地址
+						data: toAddr+mome, //转入账号地址
 						via: viaAddr,
 						chainId: that.chain3.version.network
 					};
