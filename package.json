@@ -106,8 +106,8 @@
       "cordova-plugin-appavailability": {}
     },
     "platforms": [
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

@@ -1033,7 +1033,7 @@ export class WalletProvider {
 						to: subchainAddr,
 						value: that.chain3.intToHex(amountValue),
 						shardingFlag: "0x2",
-						data: toAddr+that.stringToHexWide(mome), //转入账号地址
+						data: mome?toAddr+that.stringToHexWide(mome):toAddr, //转入账号地址
 						via: viaAddr,
 						chainId: that.chain3.version.network
 					};

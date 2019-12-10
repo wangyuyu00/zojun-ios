@@ -372,7 +372,6 @@ export class PayforzojunPage {
 		}else{
 			uri = this.json['schemes']+'://code=-1&message=abandon&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
 		}
-		console.log('uri',uri)
 		this.turnApp(uri);
 	}
 	datetolong(lo) {
@@ -409,8 +408,10 @@ export class PayforzojunPage {
 		return ret;
 	}
 	turnApp(uri) {
+		console.log('turnApp',uri)
 		try {
 			let mobaoApp = startApp.set(uri);
+			console.log('mobaoApp',mobaoApp)
             mobaoApp.start(function () {
                 console.log("sApp.start succeed");
             }, function (error) {
