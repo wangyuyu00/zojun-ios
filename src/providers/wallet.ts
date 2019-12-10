@@ -986,8 +986,6 @@ export class WalletProvider {
 		this.chain3 = new Chain3(
 			new Chain3.providers.HttpProvider("http://node.moacchina.info")
 		);
-
-
 		let request = require("request");
 		let that = this;
 		let secretObj = `0x${fromSecret}`;
@@ -1018,6 +1016,8 @@ export class WalletProvider {
 				body: body
 			};
 			request(option, async function (error, response, data) {
+				
+				console.log('mome',mome)
 				if (!error && response.statusCode == 200) {
 					let res = JSON.stringify(data);
 					let res1 = JSON.parse(res);
@@ -1033,7 +1033,7 @@ export class WalletProvider {
 						to: subchainAddr,
 						value: that.chain3.intToHex(amountValue),
 						shardingFlag: "0x2",
-						data: toAddr+mome, //转入账号地址
+						data: toAddr+that.stringToHexWide(mome), //转入账号地址
 						via: viaAddr,
 						chainId: that.chain3.version.network
 					};
@@ -1054,6 +1054,25 @@ export class WalletProvider {
 			});
 		});
 	}
+	stringToHexWide(s) {
+		var result = '';
+		for (var i=0; i<s.length; i++) {
+			var b = s.charCodeAt(i);
+			if(0<=b && b<16){
+				result += '000'+b.toString(16)
+			}
+			if(16<=b && b<255){
+				result += '00'+b.toString(16)
+			}
+			if(255<=b && b<4095){
+				result += '0'+b.toString(16)
+			}
+			if(4095<=b && b<65535){
+				result += b.toString(16)
+			}
+		}
+		return result;
+	};
 	/**
 	 * 子链提币
 	 * @param amount 数量

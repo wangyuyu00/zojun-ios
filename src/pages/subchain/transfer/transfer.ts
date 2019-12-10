@@ -135,7 +135,7 @@ export class TransferPage extends BaseUI {
   async Send() {
     let secret = AppConfig.secretDec('moac', this.user.pwd, this.user.secret);
     if (Md5.hashStr(this.pwd) == this.user.pwd) {
-			let mome:string = this.parameter.orderNo+'&'+this.amount+this.user.address+'&'+this.toAddr;
+			let mome:string = this.parameter && this.parameter.orderNo ?this.parameter.orderNo+'&'+this.amount+'&'+this.user.address+'&'+this.toAddr:'';
       let res = await this.walletProvider.SubChainSend(
         secret,
         this.toAddr,
@@ -146,29 +146,17 @@ export class TransferPage extends BaseUI {
       );
       console.log(res);
       if (res) {
-        // this.amount = "";
-        // this.toAddr = "";
-        // this.pwd = "";
-        // this.navCtrl.pop();
+        
         if (this.disEnter == false) {
           this.amount = "";
           this.toAddr = "";
           this.pwd = "";
+        }else{
+          this.checkOrderPay();
         }
-        //像墨客数据库提交订单信息
-        // this.http
-        // 	.post("墨客存储订单信息接口", {})
-        // 	.subscribe(
-        // 		data => {
-        // 			let res = JSON.stringify(data);
-        // 			let res1 = JSON.parse(res);
-
-        // 			return res1;
-        // 		}
-        // 	);
+       
         this.presentToast("交易请求已经提交给区块链网络，请等待正式生效。");
         //获取回调地址
-        this.checkOrderPay();
         //异步回调
 
         //同步回调

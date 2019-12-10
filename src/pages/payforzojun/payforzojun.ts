@@ -116,12 +116,13 @@ export class PayforzojunPage {
 					const verify = zo_public_key.verify(decrypted, this.json["sign"], 'utf8', 'base64');
 					// const verify = a_public_key.verify(decrypted, "Hliaaq1moSvCeDGQteRX0nfSdiZ5WP3g9/OYYPiyi1qXymhxNwIWaOMqeeX3e7RT PsZB2a9ihITc1pGo6s4cI4XYavKUYa6r/ZKDNJ2S6WkObiC854afh8TRoJOcYBSiVoWU7iPwnEv LYS2gbwlKd1kIlMuT072Yq15LyG3vqQQ=", 'utf8', 'base64');
 					console.log('你的 公钥验签:', verify);
-					if(verify){this.parameter = JSON.parse(decrypted);//先做解密 再赋值
+					if(verify){
+						this.parameter = JSON.parse(decrypted);//先做解密 再赋值
 						this.amount = this.parameter.orderAmount;
 						this.checkOrder();
 					}else{
 						let uri = this.json['schemes']+'://code=-1&message=verifyFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
-						console.log('uri',uri)
+						console.log('verifyuri',uri)
 						this.turnApp(uri);
 					}
 				}
@@ -168,7 +169,7 @@ export class PayforzojunPage {
 				alert('参数解析错误 请稍后再试');
 				return
 			}
-			let mome:string = this.parameter.orderNo+'&'+this.amount+this.user.address+'&'+this.toAddr;
+			let mome:string = this.parameter.orderNo+'&'+this.amount+'&'+this.user.address+'&'+this.toAddr;
 			console.log('mome',mome)
 			let res:any = await this.walletProvider.SubChainSend(
 				secret,
@@ -182,17 +183,7 @@ export class PayforzojunPage {
 			this.HASH = res;
 			console.log('子链支付返回结果',res);
 			if (res) {
-				//像墨客数据库提交订单信息
-				// this.http
-				// 	.post("墨客存储订单信息接口", {})
-				// 	.subscribe(
-				// 		data => {
-				// 			let res = JSON.stringify(data);
-				// 			let res1 = JSON.parse(res);
-
-				// 			return res1;
-				// 		}
-				// 	);
+				
 				this.presentToast("交易请求已经提交给区块链网络，请等待正式生效。");
 				//获取回调地址
 				this.checkOrderPay();
@@ -254,9 +245,8 @@ export class PayforzojunPage {
 						console.log(this.checkorderdetails)
 						this.toAddr = this.checkorderdetails.tokenAddress;
 					}else{
-						let message="校验订单失败："+res1.message;
 						let uri = this.json['schemes']+'://code=-1&message=checkOrderFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];
-						console.log('uri',uri)
+						console.log('checkOrderFail uri',uri)
 						this.turnApp(uri);
 					}
 				}
@@ -314,7 +304,6 @@ export class PayforzojunPage {
 						this.notifyOrderPay = url.substring(url.lastIndexOf('/'))
 						console.log('notifyOrderPay', this.notifyOrderPay);
 
-						// let hash = 'teststststststhash';
 						this.postNotifyOrderPay(this.HASH);
 					}else{
 						let uri = this.json['schemes']+'://code=-1&message=checkOrderPayFail&paySource='+this.json['paySource']+'&payMoney='+this.json['payMoney']+'&payType='+this.json['payType']+'&schemes='+this.json['schemes'];

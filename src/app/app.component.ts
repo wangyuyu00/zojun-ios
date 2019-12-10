@@ -34,10 +34,24 @@ export class MyApp {
         private menuCtrl: MenuController,
         splashScreen: SplashScreen,
         private translate: TranslateService) {
-            setTimeout(() => {
-                (window as any).handleOpenURL = (url: string) => {
-                    console.log('所传参数URL为', url);
-                    let arr:any = url.slice(15).split('&');
+            // setTimeout(() => {
+            //     (window as any).handleOpenURL = (url: string) => {
+            //         console.log('所传参数URL为', url);
+            //         let arr:any = url.slice(15).split('&');
+            //         let json:any={};
+            //         for (const key in arr) {
+            //             let keys:any=arr[key].slice(0,arr[key].indexOf('='));
+            //             let value:any=arr[key].slice(arr[key].indexOf('=')+1);
+            //             // let subarr:any=arr[key].split('=');
+            //             json[keys]=value;
+            //         }
+            //         this.parameterobj=json;
+            //         this.parameter = JSON.stringify(json);
+            //         console.log('处理好的 参数',this.parameter)
+            //     };
+            // }, 0);
+            let url='wallet.zojun://sign=SiozfD1S4Jl4ocEvgu+Kzt9/gYgNyCsQZ+9fThvaTqjVkAMoneJHqFvlwW4VJlWya98Od6L3iqwu5lvsjtOdKRk2JczbeCRX/u2DoJSjLk2A4sLbx7Rz32HW3Hv4hTDrd7UfeGaxz13C4nR10R6y7/uk8lyefeDR+ijwtigTGRE=&secret=YvGuPuKn5u4wmR/BqKdnzZk2DinCZWTuDj7cyQAPkHWBpD03u9y04M2i4LLDZHuhwXkWfZNc2p/K0DMmKu0hJPG85vtKo/6y4TdOSnR5wvraic3+AO83p/331rQswxIDgA7DEYUaeAC1gGzm6xRN/lPW5BGXONk9mmI04F8qwn8vlp88kn0rXSNf9p/LSY5FUkjTvpSLF0KMqWZ3lElQpuKlWakplllLIvrUTgzJXJiwZQagRsY8R0J6cKOb2pb+KFTgRUvFM7k+iimSdG5G0AXZ9L1JJKru7m5UUAL90oZM0CJ9IgdixQ3BXnI3st8ZZLSke4VlIs2p2lyrbQEW0Bt4ryuT+hYNRcdEKUbjpwXz8cmo7M9LziHvfrj4j83LiWfrlDMXaLoskMXtVnWldbwhekh6trkwzGDQc++FxJy3tIfxct8o1wbcT2yYn1nCgp16LmLOz/ZNGEKK2bSLiOaiO/vQNPs4ZuvBPKm2ls1rxMpAKqbyeqOd9TPgaRsXeJYqkIO01JlVpptnHi/VpaIgycv0oWG/Qow4k0dcfVgzhQjSJ7XDX96ULDeOe2vQk6xqdlAVS/b13zuJf+bl4uUVCX1CtAh+WjucaFBaJVGLzIsD4gD8Hdg0JMOqlI8Ej+ZDQ4aiPa9yhBvyvReX8panJqOqMgoi4kLjstQVLaQ=&version=1.0&timestamp=1575966341335&schemes=mall.zhongjun&payType=30&payMoney=0.01&paySource=TopupVC';
+            let arr:any = url.slice(15).split('&');
                     let json:any={};
                     for (const key in arr) {
                         let keys:any=arr[key].slice(0,arr[key].indexOf('='));
@@ -48,9 +62,6 @@ export class MyApp {
                     this.parameterobj=json;
                     this.parameter = JSON.stringify(json);
                     console.log('处理好的 参数',this.parameter)
-                };
-            }, 0);
-            //this.parameter='{"sign":"BYo3HfVf91pyP3BN4xJKUCHoPQRZT2BRjNgcMoHf8F7Qll2pifCa9Gv1AwHbE4wvaMiZbkmTuDWQP69P0cMWB3f+h2WquMkzNXDAwS/vPwpo5rOJ+QO73UAwxtcf+hU35lCAlmwzfONpGoCtD1St2/v/MkwLyxNg79mmI8w7Mq0=","secret":"dYDboG+7xh4FfZ2CTiF9oNkfs2IlcDRbIZHb1857qpsYxQTSnvHO374RXYZ87L2V6Kg0fvyB3kY5sa87YMaJ45Fr+GjPgNwzvK6EKbjVTLtEVvklkxUPEpoMlVyV+mUZG4epNpLqrNq2xAsqcOLkRhYr/NJf3MGNY+CR5SuZ/iQpTYBLRK//j9M1t+ozv27EP5CRMhVWtoABDe1BXPC4JKqWwFdHDsB2b79dIl0gzTX5TN4+4P8MFc6O3TvT7AZzXnT7h3opWWZID3LLjluig7pTuinvwe3lF2935d9MFDr85yjA8WK0mQZpv9pu4ZYpIzWvIgAwDD5MQ5kdzXr3WH9I8Mp/Uz5jwexshKrCFCJuHbiwAbazR1VZ/aIToeO7xtUnqcZdfYSwpnHdnr6ysJZyq/piBM65cnTZJZt4hT1/pSkGtVHuzG7Qluf6g9A5ItfXfPg01QjMJx/u9fmmGUt6lnZ1dSiUmP1YQVBrWObpLviWkGysH3mx7yxFEcRwc7DWdgwPXIQ7f+ZbQF1GE4WAdm0NEInRO7/MZtHj91QPyFwI1vxXeas4pmhHgg83yUtFeDfNhJ6AC5AXHxKLcPl7oGYs57cwNCM+ilWzof9kM2vZ4UlCDOY2O+0Am2WoTufR6W9l7hqsioZbsfqVPnQx2HfUG4FDwA0DvJ3n2K8=","version":"1.0","timestamp":"1574653219421","schemes":"mall.zhongjun","payType":"30","payMoney":"0.01","paySource":"TopupVC"}';
             this.storage.get('user').then((user) => {//获取当前用户
                 //判断打开app时 是否为中君的 url存在 存本地 跳到支付页面
                 this.user= user;
@@ -76,7 +87,7 @@ export class MyApp {
                                         //这里做返回商家处理
                                         let parameter={
                                             code:-1,
-                                            message:"钱包内无账户,请先创建账户再使用"
+                                            message:"Please create an account before using"
                                         }
                                         let uri = this.parameterobj['schemes']+'?parameter='+JSON.stringify(parameter)+'&paySource='+this.parameterobj['paySource']+'&payMoney='+this.parameterobj['payMoney']+'&payType='+this.parameterobj['payType']+'&schemes='+this.parameterobj['schemes'];
                                         console.log('uri',uri)
