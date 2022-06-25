@@ -56,7 +56,7 @@
     "ionic-angular": "3.9.2",
     "ionicons": "3.0.0",
     "jsencrypt": "^3.0.0-rc.1",
-    "jsrsasign": "^8.0.12",
+    "jsrsasign": "^10.5.25",
     "moacjs-tx": "^1.1.2",
     "moacjs-util": "^1.0.2",
     "moacjs-wallet": "^1.0.2",
